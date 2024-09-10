@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -154,7 +154,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int%5B%5D)">PriorityQueue</a></span>&#8203;(int[]&nbsp;arr)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">initialize max-heap.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -175,25 +177,60 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>int[]</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getHeap()">getHeap</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#add(int)">add</a></span>&#8203;(int&nbsp;value)</code></th>
+<td class="colLast">
+<div class="block">add value to heap.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code>int[]</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getHeap()">getHeap</a></span>()</code></th>
+<td class="colLast">
+<div class="block">get heap.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#heap_sort()">heap_sort</a></span>()</code></th>
 <td class="colLast">
 <div class="block">convert array <code>heap</code> to max-heap.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isEmpty()">isEmpty</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#normal_sort()">normal_sort</a></span>()</code></th>
 <td class="colLast">
-<div class="block">max-heap to sorted array.</div>
+<div class="block">max-heap in-place sorted array.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>int[]</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#normal_sort_copy()">normal_sort_copy</a></span>()</code></th>
+<td class="colLast">
+<div class="block">copy max-heap sorted array.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#pop_top()">pop_top</a></span>()</code></th>
+<td class="colLast">
+<div class="block">get and delete max value in heap.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sort_from_bottom(int)">sort_from_bottom</a></span>&#8203;(int&nbsp;end)</code></th>
+<td class="colLast">
+<div class="block">sifting from bottom to top.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sort_from_top(int,int)">sort_from_top</a></span>&#8203;(int&nbsp;start,
              int&nbsp;end)</code></th>
@@ -201,7 +238,7 @@ extends java.lang.Object</pre>
 <div class="block">sifting from top to bottom.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#swap(int,int)">swap</a></span>&#8203;(int&nbsp;i,
     int&nbsp;j)</code></th>
@@ -240,6 +277,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>PriorityQueue</h4>
 <pre>public&nbsp;PriorityQueue&#8203;(int[]&nbsp;arr)</pre>
+<div class="block">initialize max-heap.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>arr</code> - to heap.</dd>
@@ -288,6 +326,57 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
+<a id="sort_from_bottom(int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>sort_from_bottom</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;sort_from_bottom&#8203;(int&nbsp;end)</pre>
+<div class="block">sifting from bottom to top.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>end</code> - -- index end's heap.</dd>
+</dl>
+</li>
+</ul>
+<a id="isEmpty()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isEmpty</h4>
+<pre class="methodSignature">public&nbsp;boolean&nbsp;isEmpty()</pre>
+</li>
+</ul>
+<a id="pop_top()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>pop_top</h4>
+<pre class="methodSignature">public&nbsp;int&nbsp;pop_top()</pre>
+<div class="block">get and delete max value in heap.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>max value.</dd>
+</dl>
+</li>
+</ul>
+<a id="add(int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>add</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;add&#8203;(int&nbsp;value)</pre>
+<div class="block">add value to heap.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - -- add value.</dd>
+</dl>
+</li>
+</ul>
 <a id="heap_sort()">
 <!--   -->
 </a>
@@ -305,7 +394,21 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>normal_sort</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;normal_sort()</pre>
-<div class="block">max-heap to sorted array.</div>
+<div class="block">max-heap in-place sorted array.</div>
+</li>
+</ul>
+<a id="normal_sort_copy()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>normal_sort_copy</h4>
+<pre class="methodSignature">public&nbsp;int[]&nbsp;normal_sort_copy()</pre>
+<div class="block">copy max-heap sorted array.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>copy sorted heap</dd>
+</dl>
 </li>
 </ul>
 <a id="getHeap()">
@@ -315,6 +418,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getHeap</h4>
 <pre class="methodSignature">public&nbsp;int[]&nbsp;getHeap()</pre>
+<div class="block">get heap.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>heap.</dd>
