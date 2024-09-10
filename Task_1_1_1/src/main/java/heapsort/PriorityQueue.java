@@ -1,25 +1,35 @@
-package Heapsort;
+package heapsort;
 
+/**
+ * Class of priority queue(max-heap).
+ */
 public class PriorityQueue {
     int[] heap;
-    int size;
-    
+
+    /**
+     * @param arr to heap.
+     */
     public PriorityQueue(int[] arr) {
         this.heap = arr;
-        this.size = arr.length;
         heap_sort();
     }
 
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
+    /**
+     * swap two values in the heap.
+     * @param i -- index first value.
+     * @param j -- index second value.
+     */
     public void swap(int i, int j) {
         int temp = heap[i];
         heap[i] = heap[j];
         heap[j] = temp;
     }
 
+    /**
+     * sifting from top to bottom.
+     * @param start -- index root heap.
+     * @param end -- index end's heap.
+     */
     public void sort_from_top(int start, int end) {
         int i = start;
         while (i < end) {
@@ -41,50 +51,29 @@ public class PriorityQueue {
             }
         }
     }
-    public void sort_from_bottom(int end) {
-        int i = end;
-        int j = i / 2;
-        while (i > 0 && heap[j] > heap[i]) {
-            swap(i, j);
-            i = j;
-            j = i / 2;
-        }
-    }
 
-    public int pop_top() {
-        if (isEmpty()) {
-            return -1;
-        }
-
-        int result = heap[0];
-        swap(0, size - 1);
-        size--;
-        sort_from_top(0, size - 1);
-        return result;
-    }
-
+    /**
+     * convert array {@code heap} to max-heap.
+     */
     public void heap_sort() {
-        for (int i = size / 2 - 1; i >= 0; i--) {
-            sort_from_top(i, size);
+        for (int i = heap.length / 2 - 1; i >= 0; i--) {
+            sort_from_top(i, heap.length);
         }
     }
 
+    /**
+     * max-heap to sorted array.
+     */
     public void normal_sort() {
-        for (int i = size - 1; i >= 0; i--) {
+        for (int i = heap.length - 1; i >= 0; i--) {
             swap(i, 0);
             sort_from_top(0, i);
         }
     }
 
-    public int[] normal_sort_copy() {
-        int[] temp = heap;
-        normal_sort();
-        int[] result = new int[size];
-        System.arraycopy(heap, 0, result, 0, size);
-        heap = temp;
-        return result;
-    }
-
+    /**
+     * @return heap.
+     */
     public int[] getHeap() {
         return heap;
     }
