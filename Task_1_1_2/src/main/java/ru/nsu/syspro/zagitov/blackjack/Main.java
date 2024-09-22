@@ -1,4 +1,4 @@
-package ru.nsu.syspro.zagitov.blackJack;
+package ru.nsu.syspro.zagitov.blackjack;
 
 
 /**

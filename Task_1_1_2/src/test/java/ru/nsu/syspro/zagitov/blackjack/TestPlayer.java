@@ -1,6 +1,6 @@
-package ru.nsu.syspro.zagitov.blackJack;
+package ru.nsu.syspro.zagitov.blackjack;
 
-import static ru.nsu.syspro.zagitov.blackJack.Constants.closeCard;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.closeCard;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
