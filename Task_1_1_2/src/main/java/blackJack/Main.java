@@ -1,4 +1,4 @@
-package BlackJack;
+package blackJack;
 
 
 /**

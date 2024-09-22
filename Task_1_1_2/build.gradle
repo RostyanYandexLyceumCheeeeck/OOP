@@ -3,7 +3,7 @@ plugins {
     id 'jacoco'
 }
 
-group = 'Heapsort'
+group = 'blackJack'
 version = '1.0-SNAPSHOT'
 
 repositories {

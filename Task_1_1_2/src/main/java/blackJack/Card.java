@@ -1,6 +1,6 @@
-package BlackJack;
+package blackJack;
 
-import static BlackJack.Constants.*;
+import static blackJack.Constants.*;
 
 
 /**
@@ -25,7 +25,7 @@ public class Card {
     }
 
      /**
-      * setup overflow. if card is Ace, ==> this.overflow = -10.
+      * setup overflow. if card is Ace, this.overflow = -10.
       */
     public void setOverflow() {
         this.overflow = ((value % numberOfRanks) == indexAce ? -overflowAce : 0);

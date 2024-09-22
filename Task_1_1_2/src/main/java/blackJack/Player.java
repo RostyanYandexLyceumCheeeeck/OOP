@@ -1,14 +1,12 @@
-package BlackJack;
+package blackJack;
 
 import java.util.ArrayList;
 
-import static BlackJack.Constants.blackJack;
+import static blackJack.Constants.blackJack;
 
 
 /**
  * class Player.
- *//**
- *
  */
 public class Player {
     private int score = 0;
@@ -18,7 +16,7 @@ public class Player {
      * create instance of the class.
      */
     public Player() {
-        hand = new ArrayList<Card>();
+        hand = new ArrayList<>();
     }
 
     /**
