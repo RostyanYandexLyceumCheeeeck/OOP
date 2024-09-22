@@ -1,33 +1,27 @@
-package blackJackPackage;
+package BlackJackPackage;
 
-import static blackJackPackage.Constants.blackJack;
-import static blackJackPackage.Constants.continueUpCard;
-import static blackJackPackage.Constants.dealerLimit;
-import static blackJackPackage.Constants.exitGame;
-import static blackJackPackage.Constants.indexCloseCardDealer;
-
-import static blackJackPackage.Constants.messageDealer0;
-import static blackJackPackage.Constants.messageDealer1;
-import static blackJackPackage.Constants.messageDealer2;
-import static blackJackPackage.Constants.messageDealer3;
-
-import static blackJackPackage.Constants.messageDrawRound;
-
-import static blackJackPackage.Constants.messageExitGame0;
-import static blackJackPackage.Constants.messageExitGame1;
-
-import static blackJackPackage.Constants.messagePlayer0;
-import static blackJackPackage.Constants.messagePlayer1;
-import static blackJackPackage.Constants.messagePlayer2;
-import static blackJackPackage.Constants.messagePlayer3;
-
-import static blackJackPackage.Constants.messageWinRoundDealer0;
-import static blackJackPackage.Constants.messageWinRoundDealer1;
-import static blackJackPackage.Constants.messageWinRoundPlayer0;
-import static blackJackPackage.Constants.messageWinRoundPlayer1;
-
-import static blackJackPackage.Constants.numberOfCards;
-import static blackJackPackage.Constants.stopUpCard;
+import static BlackJackPackage.Constants.blackJack;
+import static BlackJackPackage.Constants.continueUpCard;
+import static BlackJackPackage.Constants.dealerLimit;
+import static BlackJackPackage.Constants.exitGame;
+import static BlackJackPackage.Constants.indexCloseCardDealer;
+import static BlackJackPackage.Constants.messageDealer0;
+import static BlackJackPackage.Constants.messageDealer1;
+import static BlackJackPackage.Constants.messageDealer2;
+import static BlackJackPackage.Constants.messageDealer3;
+import static BlackJackPackage.Constants.messageDrawRound;
+import static BlackJackPackage.Constants.messageExitGame0;
+import static BlackJackPackage.Constants.messageExitGame1;
+import static BlackJackPackage.Constants.messagePlayer0;
+import static BlackJackPackage.Constants.messagePlayer1;
+import static BlackJackPackage.Constants.messagePlayer2;
+import static BlackJackPackage.Constants.messagePlayer3;
+import static BlackJackPackage.Constants.messageWinRoundDealer0;
+import static BlackJackPackage.Constants.messageWinRoundDealer1;
+import static BlackJackPackage.Constants.messageWinRoundPlayer0;
+import static BlackJackPackage.Constants.messageWinRoundPlayer1;
+import static BlackJackPackage.Constants.numberOfCards;
+import static BlackJackPackage.Constants.stopUpCard;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,7 +36,7 @@ public class BlackJack {
     private int countRounds;
     private ArrayList<Card> cards;
 
-    interface myInterface {
+    interface MyInterface {
         boolean openCard(Player human, String prefix, int index);
     }
 
@@ -135,17 +129,19 @@ public class BlackJack {
                     str1 = messageDrawRound;
                 }
 
-                String str2 = (scorePlayer > scoreDealer ? messageWinRoundPlayer1 : messageWinRoundDealer1);
+                String str2 = (scorePlayer > scoreDealer ?
+                        messageWinRoundPlayer1 : messageWinRoundDealer1);
                 if (scorePlayer == scoreDealer) {
                     str2 = "";
                 }
 
-                System.out.println(str1 + " Счёт " + scorePlayer + ":" + scoreDealer + str2 + "\n");
+                System.out.println(str1 + " Счёт " + scorePlayer + ":" + scoreDealer
+                        + str2 + "\n");
                 this.cards.get(indexCloseCardDealer).faceUp = true;
                 shuffleCards();
             }
-        } catch (Exception MyException) {
-            System.out.println(MyException.getMessage());
+        } catch (Exception myException) {
+            System.out.println(myException.getMessage());
         }
         console.close();
     }
@@ -178,7 +174,7 @@ public class BlackJack {
         boolean roundLoose;
         int index;
 
-        myInterface copyPaste = (human, prefix, index1) -> {
+        MyInterface copyPaste = (human, prefix, index1) -> {
             Card newCard = cards.get(index1);
             System.out.println(prefix + newCard);
 

@@ -1,4 +1,4 @@
-package blackJackPackage;
+package BlackJackPackage;
 
 
 /**
@@ -7,7 +7,7 @@ package blackJackPackage;
 public class Constants {
     public static final String[] suits = {"Треф", "Бубен", "Черви", "Пики"};
     public static final String[] ranks = {"Двойка", "Тройка", "Четвёрка", "Пятёрка", "Шестёрка",
-            "Семёрка", "Восьмёрка", "Девятка", "Десятка", "Валет", "Дама", "Король", "Туз"};
+        "Семёрка", "Восьмёрка", "Девятка", "Десятка", "Валет", "Дама", "Король", "Туз"};
 
     public static final int numberOfCards = 52;
     public static final int numberOfRanks = 13;

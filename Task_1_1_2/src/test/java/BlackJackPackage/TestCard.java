@@ -1,6 +1,6 @@
-package blackJackPackage;
+package BlackJackPackage;
 
-import static blackJackPackage.Constants.closeCard;
+import static BlackJackPackage.Constants.closeCard;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

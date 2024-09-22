@@ -1,12 +1,12 @@
-package blackJackPackage;
+package BlackJackPackage;
 
-import static blackJackPackage.Constants.closeCard;
-import static blackJackPackage.Constants.indexAce;
-import static blackJackPackage.Constants.numberOfCards;
-import static blackJackPackage.Constants.numberOfRanks;
-import static blackJackPackage.Constants.overflowAce;
-import static blackJackPackage.Constants.ranks;
-import static blackJackPackage.Constants.suits;
+import static BlackJackPackage.Constants.closeCard;
+import static BlackJackPackage.Constants.indexAce;
+import static BlackJackPackage.Constants.numberOfCards;
+import static BlackJackPackage.Constants.numberOfRanks;
+import static BlackJackPackage.Constants.overflowAce;
+import static BlackJackPackage.Constants.ranks;
+import static BlackJackPackage.Constants.suits;
 
 
 /**
@@ -32,9 +32,9 @@ public class Card {
         this.faceUp = isFaceUp;
     }
 
-     /**
-      * setup overflow. if card is Ace, this.overflow = -10.
-      */
+    /**
+     * setup overflow. if card is Ace, this.overflow = -10.
+     * */
     public void setOverflow() {
         this.overflow = ((value % numberOfRanks) == indexAce ? -overflowAce : 0);
     }

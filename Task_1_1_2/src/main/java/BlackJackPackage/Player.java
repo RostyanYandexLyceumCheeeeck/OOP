@@ -1,6 +1,6 @@
-package blackJackPackage;
+package BlackJackPackage;
 
-import static blackJackPackage.Constants.blackJack;
+import static BlackJackPackage.Constants.blackJack;
 
 import java.util.ArrayList;
 
