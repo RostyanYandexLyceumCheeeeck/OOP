@@ -1,6 +1,12 @@
-package blackJack;
+package blackJackPackage;
 
-import static blackJack.Constants.*;
+import static blackJackPackage.Constants.closeCard;
+import static blackJackPackage.Constants.indexAce;
+import static blackJackPackage.Constants.numberOfCards;
+import static blackJackPackage.Constants.numberOfRanks;
+import static blackJackPackage.Constants.overflowAce;
+import static blackJackPackage.Constants.ranks;
+import static blackJackPackage.Constants.suits;
 
 
 /**
@@ -18,7 +24,9 @@ public class Card {
      * @param isFaceUp shows if the card is turned over.
      */
     public Card(int value, boolean isFaceUp)  throws Exception {
-        if (value < 0) throw new Exception("Card value cannot be negative");
+        if (value < 0) {
+            throw new Exception("Card value cannot be negative");
+        }
         this.overflow = 0;
         this.value = value % numberOfCards;
         this.faceUp = isFaceUp;
@@ -40,6 +48,7 @@ public class Card {
 
     /**
      * get overflow.
+     *
      * @return overflow.
      */
     public int getOverflow() {
@@ -49,13 +58,15 @@ public class Card {
     @Override
     public String toString() {
         if (faceUp) {
-            return ranks[value % numberOfRanks] + " " + suits[value / numberOfRanks] + " (" + getPrice() + ")";
+            return ranks[value % numberOfRanks] + " "
+                    + suits[value / numberOfRanks] + " (" + getPrice() + ")";
         }
         return closeCard;
     }
 
     /**
      * get price is card. 2 == 2, 3 == 3, ..., 10 == 10, J, Q, K == 10, A == (1 or 11).
+     *
      * @return price if {@code faceUp} else 0.
      */
     public int getPrice() {

@@ -1,10 +1,38 @@
-package blackJack;
+package blackJackPackage;
+
+import static blackJackPackage.Constants.blackJack;
+import static blackJackPackage.Constants.continueUpCard;
+import static blackJackPackage.Constants.dealerLimit;
+import static blackJackPackage.Constants.exitGame;
+import static blackJackPackage.Constants.indexCloseCardDealer;
+
+import static blackJackPackage.Constants.messageDealer0;
+import static blackJackPackage.Constants.messageDealer1;
+import static blackJackPackage.Constants.messageDealer2;
+import static blackJackPackage.Constants.messageDealer3;
+
+import static blackJackPackage.Constants.messageDrawRound;
+
+import static blackJackPackage.Constants.messageExitGame0;
+import static blackJackPackage.Constants.messageExitGame1;
+
+import static blackJackPackage.Constants.messagePlayer0;
+import static blackJackPackage.Constants.messagePlayer1;
+import static blackJackPackage.Constants.messagePlayer2;
+import static blackJackPackage.Constants.messagePlayer3;
+
+import static blackJackPackage.Constants.messageWinRoundDealer0;
+import static blackJackPackage.Constants.messageWinRoundDealer1;
+import static blackJackPackage.Constants.messageWinRoundPlayer0;
+import static blackJackPackage.Constants.messageWinRoundPlayer1;
+
+import static blackJackPackage.Constants.numberOfCards;
+import static blackJackPackage.Constants.stopUpCard;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-import static blackJack.Constants.*;
 
 /**
  * Class Game "Консольный блэкджек".
@@ -27,22 +55,28 @@ public class BlackJack {
 
     /**
      * setup {@code countDecks}.
+     *
      * @param newCountDecks is input count decks.
-     * @return false if {@code newCountDecks < 1} else true 
+     * @return false if {@code newCountDecks < 1} else true.
      */
     private boolean setCountDecks(int newCountDecks){
-        if (newCountDecks < 1) return false;
+        if (newCountDecks < 1) {
+            return false;
+        }
         this.countDecks = newCountDecks;
         return true;
     }
 
     /**
      * setup {@code countDecks}.
+     *
      * @param newCountRounds is input count rounds.
-     * @return false if {@code newCountRounds < 1} else true
+     * @return false if {@code newCountRounds < 1} else true.
      */
     private boolean setCountRounds(int newCountRounds){
-        if (newCountRounds < 1) return false;
+        if (newCountRounds < 1) {
+            return false;
+        }
         this.countRounds = newCountRounds;
         return true;
     }
@@ -97,10 +131,14 @@ public class BlackJack {
                 scoreDealer += (resultRound < 0 ? 1 : 0);
 
                 String str1 = (resultRound > 0 ? messageWinRoundPlayer0 : messageWinRoundDealer0);
-                if (resultRound == 0) str1 = messageDrawRound;
+                if (resultRound == 0) {
+                    str1 = messageDrawRound;
+                }
 
                 String str2 = (scorePlayer > scoreDealer ? messageWinRoundPlayer1 : messageWinRoundDealer1);
-                if (scorePlayer == scoreDealer) str2 = "";
+                if (scorePlayer == scoreDealer) {
+                    str2 = "";
+                }
 
                 System.out.println(str1 + " Счёт " + scorePlayer + ":" + scoreDealer + str2 + "\n");
                 this.cards.get(indexCloseCardDealer).faceUp = true;
@@ -114,16 +152,18 @@ public class BlackJack {
 
     /**
      * displays your and dealer's cards.
+     *
      * @param player You (instance of the class PLayer).
      * @param dealer Dealer (instance of the class PLayer).
      */
-    private void printHands(Player player, Player dealer){
+    private void printHands(Player player, Player dealer) {
         System.out.println(messagePlayer3 + player);
         System.out.println(messageDealer3 + dealer);
     }
 
     /**
      * function start round.
+     *
      * @param console where the user enters the data.
      * @param number round number.
      * @return -1 if win Dealer else (1 if You win else 0).
@@ -140,9 +180,9 @@ public class BlackJack {
 
         myInterface copyPaste = (human, prefix, index1) -> {
             Card newCard = cards.get(index1);
-            boolean result = human.addCard(newCard);
-
             System.out.println(prefix + newCard);
+
+            boolean result = human.addCard(newCard);
             printHands(player, dealer);
             System.out.println();
 
@@ -158,7 +198,9 @@ public class BlackJack {
         System.out.println("Раунд " + number + "\nДилер раздал карты");
         printHands(player, dealer);
 
-        if (player.getScore() == blackJack) return winPlayer;
+        if (player.getScore() == blackJack) {
+            return winPlayer;
+        }
 
         System.out.println(messagePlayer0);
         int flag = console.nextInt();
@@ -170,7 +212,9 @@ public class BlackJack {
         while (flag == continueUpCard) {
             roundLoose = copyPaste.openCard(player, messagePlayer2, ++index);
 
-            if (roundLoose) return winDealer;
+            if (roundLoose) {
+                return winDealer;
+            }
 
             System.out.println(messagePlayer0);
             flag = console.nextInt();
@@ -180,7 +224,9 @@ public class BlackJack {
             }
         }
 
-        if (flag == exitGame) throw new Exception(messageExitGame1);
+        if (flag == exitGame) {
+            throw new Exception(messageExitGame1);
+        }
 
         this.cards.get(indexCloseCardDealer).faceUp = true;
         System.out.println(messageDealer0);
@@ -189,15 +235,21 @@ public class BlackJack {
         printHands(player, dealer);
         System.out.println();
 
-        if (dealer.getScore() == blackJack) return winDealer;
+        if (dealer.getScore() == blackJack) {
+            return winDealer;
+        }
 
         while (dealer.getScore() < dealerLimit) {
             roundLoose = copyPaste.openCard(dealer, messageDealer2, ++index);
 
-            if (roundLoose) return winPlayer;
+            if (roundLoose) {
+                return winPlayer;
+            }
         }
 
-        if (player.getScore() == dealer.getScore()) return draw;
+        if (player.getScore() == dealer.getScore()) {
+            return draw;
+        }
         return (player.getScore() > dealer.getScore() ? winPlayer : winDealer);
     }
 }

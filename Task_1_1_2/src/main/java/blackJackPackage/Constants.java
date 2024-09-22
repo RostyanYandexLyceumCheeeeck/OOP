@@ -1,10 +1,13 @@
-package blackJack;
+package blackJackPackage;
 
-/* class Constants my program. */
+
+/**
+ *  class Constants my program.
+ */
 public class Constants {
     public static final String[] suits = {"Треф", "Бубен", "Черви", "Пики"};
-    public static final String[] ranks = {"Двойка", "Тройка", "Четвёрка", "Пятёрка", "Шестёрка", "Семёрка",
-            "Восьмёрка", "Девятка", "Десятка", "Валет", "Дама", "Король", "Туз"};
+    public static final String[] ranks = {"Двойка", "Тройка", "Четвёрка", "Пятёрка", "Шестёрка",
+            "Семёрка", "Восьмёрка", "Девятка", "Десятка", "Валет", "Дама", "Король", "Туз"};
 
     public static final int numberOfCards = 52;
     public static final int numberOfRanks = 13;
@@ -21,16 +24,17 @@ public class Constants {
     public static final int continueUpCard = 1;
 
     public static final String closeCard = "<закрытая карта>";
-    public static final String messageExitGame0 = "--------------------------------------------------\n" +
-                                                  "!!! Вы можете выйти из игры, если введёте “" + exitGame + "” !!!" +
-                                                  "--------------------------------------------------";
+    public static final String messageExitGame0 =
+            "--------------------------------------------------\n"
+          + "!!! Вы можете выйти из игры, если введёте “" + exitGame + "” !!!\n"
+          + "--------------------------------------------------";
     public static final String messageExitGame1 = "Вы досрочно закочили игру!";
 
-    public static final String messagePlayer0 = "Ваш ход\n-------\nВведите “" + continueUpCard +
-                                                    "”, чтобы взять карту, и “" + stopUpCard +
-                                                    "”, чтобы остановиться...";
-    public static final String messagePlayer1 = "Введите число из возможных: [" + exitGame + ", " +
-            stopUpCard + ", " + continueUpCard + "] !!!";
+    public static final String messagePlayer0 = "Ваш ход\n-------\nВведите “" + continueUpCard
+                                               + "”, чтобы взять карту, и “" + stopUpCard
+                                               + "”, чтобы остановиться...";
+    public static final String messagePlayer1 = "Введите число из возможных: [" + exitGame + ", "
+                                               + stopUpCard + ", " + continueUpCard + "] !!!";
     public static final String messagePlayer2 = "Вы открыли карту ";
     public static final String messagePlayer3 = "Ваши карты:   ";
 

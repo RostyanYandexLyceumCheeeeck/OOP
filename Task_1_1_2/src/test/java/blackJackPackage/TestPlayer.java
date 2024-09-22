@@ -1,9 +1,10 @@
-package blackJack;
+package blackJackPackage;
+
+import static blackJackPackage.Constants.closeCard;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static blackJack.Constants.closeCard;
 
 /**
  * testing class Card.
@@ -130,7 +131,8 @@ public class TestPlayer {
         player.addCard(aceOfHearts);
         player.addCard(aceOfSpades);
 
-        String expectedMessage = "[Валет Черви (10), Валет Пики (10), Туз Черви (1), Туз Пики (1)] ==> 22";
+        String expectedMessage =
+                "[Валет Черви (10), Валет Пики (10), Туз Черви (1), Туз Пики (1)] ==> 22";
         Assertions.assertEquals(expectedMessage, player.toString());
     }
 }

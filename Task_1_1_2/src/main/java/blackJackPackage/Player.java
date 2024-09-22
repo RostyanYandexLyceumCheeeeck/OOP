@@ -1,8 +1,8 @@
-package blackJack;
+package blackJackPackage;
+
+import static blackJackPackage.Constants.blackJack;
 
 import java.util.ArrayList;
-
-import static blackJack.Constants.blackJack;
 
 
 /**
@@ -24,7 +24,9 @@ public class Player {
      */
     private void setHand() {
         for (Card card : hand) {
-            if (score < blackJack) return;
+            if (score < blackJack) {
+                return;
+            }
             int oldPrice = card.getPrice();
             card.setOverflow();
             score -= oldPrice - card.getPrice();
@@ -48,6 +50,7 @@ public class Player {
 
     /**
      * get score hand.
+     *
      * @return {@code score}.
      */
     public int getScore() {

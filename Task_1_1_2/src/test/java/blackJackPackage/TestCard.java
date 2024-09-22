@@ -1,9 +1,10 @@
-package blackJack;
+package blackJackPackage;
 
-import org.junit.jupiter.api.Test;
+import static blackJackPackage.Constants.closeCard;
+
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import static blackJack.Constants.closeCard;
 
 /**
  * testing class Card.
