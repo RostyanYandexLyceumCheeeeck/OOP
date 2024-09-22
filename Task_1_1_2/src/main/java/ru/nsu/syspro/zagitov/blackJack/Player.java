@@ -1,6 +1,6 @@
-package BlackJackPackage;
+package ru.nsu.syspro.zagitov.blackJack;
 
-import static BlackJackPackage.Constants.blackJack;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.blackJack;
 
 import java.util.ArrayList;
 

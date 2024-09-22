@@ -1,27 +1,27 @@
-package BlackJackPackage;
+package ru.nsu.syspro.zagitov.blackJack;
 
-import static BlackJackPackage.Constants.blackJack;
-import static BlackJackPackage.Constants.continueUpCard;
-import static BlackJackPackage.Constants.dealerLimit;
-import static BlackJackPackage.Constants.exitGame;
-import static BlackJackPackage.Constants.indexCloseCardDealer;
-import static BlackJackPackage.Constants.messageDealer0;
-import static BlackJackPackage.Constants.messageDealer1;
-import static BlackJackPackage.Constants.messageDealer2;
-import static BlackJackPackage.Constants.messageDealer3;
-import static BlackJackPackage.Constants.messageDrawRound;
-import static BlackJackPackage.Constants.messageExitGame0;
-import static BlackJackPackage.Constants.messageExitGame1;
-import static BlackJackPackage.Constants.messagePlayer0;
-import static BlackJackPackage.Constants.messagePlayer1;
-import static BlackJackPackage.Constants.messagePlayer2;
-import static BlackJackPackage.Constants.messagePlayer3;
-import static BlackJackPackage.Constants.messageWinRoundDealer0;
-import static BlackJackPackage.Constants.messageWinRoundDealer1;
-import static BlackJackPackage.Constants.messageWinRoundPlayer0;
-import static BlackJackPackage.Constants.messageWinRoundPlayer1;
-import static BlackJackPackage.Constants.numberOfCards;
-import static BlackJackPackage.Constants.stopUpCard;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.blackJack;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.continueUpCard;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.dealerLimit;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.exitGame;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.indexCloseCardDealer;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.messageDealer0;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.messageDealer1;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.messageDealer2;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.messageDealer3;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.messageDrawRound;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.messageExitGame0;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.messageExitGame1;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.messagePlayer0;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.messagePlayer1;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.messagePlayer2;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.messagePlayer3;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.messageWinRoundDealer0;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.messageWinRoundDealer1;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.messageWinRoundPlayer0;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.messageWinRoundPlayer1;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.numberOfCards;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.stopUpCard;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,7 +43,7 @@ public class BlackJack {
     /**
      * create instance of the class.
      */
-    public BlackJack(){
+    public BlackJack() {
         this.countDecks = 1;
     }
 
@@ -53,7 +53,7 @@ public class BlackJack {
      * @param newCountDecks is input count decks.
      * @return false if {@code newCountDecks < 1} else true.
      */
-    private boolean setCountDecks(int newCountDecks){
+    private boolean setCountDecks(int newCountDecks) {
         if (newCountDecks < 1) {
             return false;
         }
@@ -67,7 +67,7 @@ public class BlackJack {
      * @param newCountRounds is input count rounds.
      * @return false if {@code newCountRounds < 1} else true.
      */
-    private boolean setCountRounds(int newCountRounds){
+    private boolean setCountRounds(int newCountRounds) {
         if (newCountRounds < 1) {
             return false;
         }
@@ -89,7 +89,7 @@ public class BlackJack {
     /**
      * reset overflow is cards, and shuffle {@code cards}.
      */
-    private void shuffleCards(){
+    private void shuffleCards() {
         for (Card card : this.cards) {
             card.resetOverflow();
         }
@@ -129,8 +129,8 @@ public class BlackJack {
                     str1 = messageDrawRound;
                 }
 
-                String str2 = (scorePlayer > scoreDealer ?
-                        messageWinRoundPlayer1 : messageWinRoundDealer1);
+                String str2 = (scorePlayer > scoreDealer
+                        ? messageWinRoundPlayer1 : messageWinRoundDealer1);
                 if (scorePlayer == scoreDealer) {
                     str2 = "";
                 }

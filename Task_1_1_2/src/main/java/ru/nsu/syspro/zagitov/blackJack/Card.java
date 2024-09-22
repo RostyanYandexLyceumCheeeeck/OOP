@@ -1,12 +1,12 @@
-package BlackJackPackage;
+package ru.nsu.syspro.zagitov.blackJack;
 
-import static BlackJackPackage.Constants.closeCard;
-import static BlackJackPackage.Constants.indexAce;
-import static BlackJackPackage.Constants.numberOfCards;
-import static BlackJackPackage.Constants.numberOfRanks;
-import static BlackJackPackage.Constants.overflowAce;
-import static BlackJackPackage.Constants.ranks;
-import static BlackJackPackage.Constants.suits;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.closeCard;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.indexAce;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.numberOfCards;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.numberOfRanks;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.overflowAce;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.ranks;
+import static ru.nsu.syspro.zagitov.blackJack.Constants.suits;
 
 
 /**
