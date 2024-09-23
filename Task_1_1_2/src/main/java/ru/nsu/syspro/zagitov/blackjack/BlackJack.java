@@ -1,9 +1,5 @@
 package ru.nsu.syspro.zagitov.blackjack;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
-
 import static ru.nsu.syspro.zagitov.blackjack.Constants.blackJack;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.continueUpCard;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.dealerLimit;
@@ -29,6 +25,9 @@ import static ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundPlayer1;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.numberOfCards;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.stopUpCard;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
 
 
 /**
