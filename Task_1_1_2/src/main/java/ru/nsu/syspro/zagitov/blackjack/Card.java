@@ -14,21 +14,21 @@ import static ru.nsu.syspro.zagitov.blackjack.Constants.suits;
  */
 public class Card {
     private int overflow;
-    private final int value;
+    private final int index;
     public boolean faceUp;
 
     /**
      * create instance of the class.
      *
-     * @param value in the range [0, {@code numberOfCards - 1}].
+     * @param index in the range [0, {@code numberOfCards - 1}].
      * @param isFaceUp shows if the card is turned over.
      */
-    public Card(int value, boolean isFaceUp)  throws Exception {
-        if (value < 0) {
-            throw new Exception("Card value cannot be negative");
+    public Card(int index, boolean isFaceUp)  throws Exception {
+        if (index < 0) {
+            throw new Exception("Card index cannot be negative");
         }
         this.overflow = 0;
-        this.value = value % numberOfCards;
+        this.index = index % numberOfCards;
         this.faceUp = isFaceUp;
     }
 
@@ -36,7 +36,7 @@ public class Card {
      * setup overflow. if card is Ace, this.overflow = -10.
      * */
     public void setOverflow() {
-        this.overflow = ((value % numberOfRanks) == indexAce ? -overflowAce : 0);
+        this.overflow = ((index % numberOfRanks) == indexAce ? -overflowAce : 0);
     }
 
     /**
@@ -58,8 +58,8 @@ public class Card {
     @Override
     public String toString() {
         if (faceUp) {
-            return ranks[value % numberOfRanks] + " "
-                    + suits[value / numberOfRanks] + " (" + getPrice() + ")";
+            return ranks[index % numberOfRanks] + " "
+                    + suits[index / numberOfRanks] + " (" + getPrice() + ")";
         }
         return closeCard;
     }
@@ -73,7 +73,7 @@ public class Card {
         if (!faceUp) {
             return 0;
         }
-        int t = value % numberOfRanks;
+        int t = index % numberOfRanks;
         return Math.min(t + 2, 10) + (t == indexAce ? 1 : 0) + overflow;
     }
 }

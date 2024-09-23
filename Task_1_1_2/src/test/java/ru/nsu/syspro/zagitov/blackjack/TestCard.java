@@ -18,7 +18,7 @@ public class TestCard {
             card.getPrice();
         });
 
-        String expectedMessage = "Card value cannot be negative";
+        String expectedMessage = "Card index cannot be negative";
         String actualMessage = exception.getMessage();
         Assertions.assertEquals(expectedMessage, actualMessage);
     }

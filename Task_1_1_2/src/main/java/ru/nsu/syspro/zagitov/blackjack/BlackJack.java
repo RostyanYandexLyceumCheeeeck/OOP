@@ -1,5 +1,9 @@
 package ru.nsu.syspro.zagitov.blackjack;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
 import static ru.nsu.syspro.zagitov.blackjack.Constants.blackJack;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.continueUpCard;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.dealerLimit;
@@ -12,6 +16,8 @@ import static ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer3;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.messageDrawRound;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.messageExitGame0;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.messageExitGame1;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messageMaxDecks;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messageMaxRounds;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer0;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer1;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer2;
@@ -23,9 +29,6 @@ import static ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundPlayer1;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.numberOfCards;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.stopUpCard;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
 
 
 /**
@@ -103,14 +106,14 @@ public class BlackJack {
         System.out.println("Добро пожаловать в Блэкджек!");
         Scanner console = new Scanner(System.in);
 
-        System.out.println("Сколько колод используем?");
+        System.out.println("Сколько колод используем? " + messageMaxDecks);
         while (!setCountDecks(console.nextInt())) {
-            System.out.println("Введите целое число больше 0 !!!");
+            System.out.println(messageMaxDecks);
         }
 
-        System.out.println("Сколько раундов играем?");
+        System.out.println("Сколько раундов играем? " + messageMaxRounds);
         while (!setCountRounds(console.nextInt())) {
-            System.out.println("Введите целое число больше 0 !!!");
+            System.out.println(messageMaxRounds);
         }
         setCards();
 
@@ -120,23 +123,24 @@ public class BlackJack {
             int scorePlayer = 0;
             int scoreDealer = 0;
             for (int roundNumber = 1; roundNumber <= this.countRounds; roundNumber++) {
-                int resultRound = startRound(console, roundNumber);
+                int resultRound = round(console, roundNumber);
                 scorePlayer += (resultRound > 0 ? 1 : 0);
                 scoreDealer += (resultRound < 0 ? 1 : 0);
 
-                String str1 = (resultRound > 0 ? messageWinRoundPlayer0 : messageWinRoundDealer0);
+                String whoWinRound = (resultRound > 0
+                        ? messageWinRoundPlayer0 : messageWinRoundDealer0);
                 if (resultRound == 0) {
-                    str1 = messageDrawRound;
+                    whoWinRound = messageDrawRound;
                 }
 
-                String str2 = (scorePlayer > scoreDealer
+                String currentLeader = (scorePlayer > scoreDealer
                         ? messageWinRoundPlayer1 : messageWinRoundDealer1);
                 if (scorePlayer == scoreDealer) {
-                    str2 = "";
+                    currentLeader = "";
                 }
 
-                System.out.println(str1 + " Счёт " + scorePlayer + ":" + scoreDealer
-                        + str2 + "\n");
+                System.out.println(whoWinRound + " Счёт " + scorePlayer + ":" + scoreDealer
+                        + currentLeader + "\n");
                 this.cards.get(indexCloseCardDealer).faceUp = true;
                 shuffleCards();
             }
@@ -163,9 +167,10 @@ public class BlackJack {
      * @param console where the user enters the data.
      * @param number round number.
      * @return -1 if win Dealer else (1 if You win else 0).
-     * @throws Exception if you have entered {@code exitGame}.
+     * @throws Exception if you have entered {@code exitGame} or
+     * not {@code messagePlayer1}.
      */
-    private int startRound(Scanner console, int number) throws Exception {
+    private int round(Scanner console, int number) throws Exception {
         int draw = 0;
         int winPlayer = 1;
         int winDealer = -1;
@@ -185,9 +190,9 @@ public class BlackJack {
             return result;
         };
 
-        for (index = 0; index <= indexCloseCardDealer; index++) {
+        for (index = 0; index <= indexCloseCardDealer; index += 2) {
             player.addCard(this.cards.get(index));
-            dealer.addCard(this.cards.get(++index));
+            dealer.addCard(this.cards.get(index + 1));
         }
         this.cards.get(indexCloseCardDealer).faceUp = false;
 

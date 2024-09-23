@@ -20,7 +20,7 @@ public class Player {
     }
 
     /**
-     * setup hand.
+     * setup {@code hand} and update {@code score}.
      */
     private void setHand() {
         for (Card card : hand) {
