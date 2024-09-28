@@ -1,5 +1,7 @@
 package ru.nsu.syspro.zagitov.blackjack;
 
+import ru.nsu.syspro.zagitov.blackjack.cards.Card;
+
 import static ru.nsu.syspro.zagitov.blackjack.Constants.blackJack;
 
 import java.util.ArrayList;

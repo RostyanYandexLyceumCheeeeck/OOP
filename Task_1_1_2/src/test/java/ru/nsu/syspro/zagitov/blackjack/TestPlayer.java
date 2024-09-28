@@ -4,6 +4,7 @@ import static ru.nsu.syspro.zagitov.blackjack.Constants.closeCard;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ru.nsu.syspro.zagitov.blackjack.cards.Card;
 
 
 /**
@@ -15,7 +16,7 @@ public class TestPlayer {
     public void testAddCard0() throws Exception {
         Player player = new Player();
 
-        Card jackOfHearts = new Card(13 * 2 + 9, true);
+        Card jackOfHearts = new Card("Валет", "Черви", true);
         Assertions.assertFalse(player.addCard(jackOfHearts));
         Assertions.assertEquals(10, player.getScore());
     }
@@ -24,8 +25,8 @@ public class TestPlayer {
     public void testAddCard1() throws Exception {
         Player player = new Player();
 
-        Card jackOfHearts = new Card(13 * 2 + 9, true);
-        Card aceOfHearts = new Card(13 * 2 + 12, true);
+        Card jackOfHearts = new Card("Валет", "Черви", true);
+        Card aceOfHearts = new Card("Туз", "Черви", true);
 
         Assertions.assertFalse(player.addCard(jackOfHearts));
         Assertions.assertFalse(player.addCard(aceOfHearts));
@@ -37,9 +38,9 @@ public class TestPlayer {
     public void testAddCard2() throws Exception {
         Player player = new Player();
 
-        Card jackOfHearts = new Card(13 * 2 + 9, true);
-        Card aceOfHearts = new Card(13 * 2 + 12, true);
-        Card aceOfSpades = new Card(13 * 3 + 12, true);
+        Card jackOfHearts = new Card("Валет", "Черви", true);
+        Card aceOfHearts = new Card("Туз", "Черви", true);
+        Card aceOfSpades = new Card("Туз", "Пики", true);
 
         Assertions.assertFalse(player.addCard(jackOfHearts));
         Assertions.assertFalse(player.addCard(aceOfHearts));
@@ -52,10 +53,10 @@ public class TestPlayer {
     public void testAddCard3() throws Exception {
         Player player = new Player();
 
-        Card jackOfHearts = new Card(13 * 2 + 9, true);
-        Card jackOfSpades = new Card(13 * 3 + 9, true);
-        Card aceOfHearts = new Card(13 * 2 + 12, true);
-        Card aceOfSpades = new Card(13 * 3 + 12, true);
+        Card jackOfHearts = new Card("Валет", "Черви", true);
+        Card jackOfSpades = new Card("Валет", "Пики", true);
+        Card aceOfHearts = new Card("Туз", "Черви", true);
+        Card aceOfSpades = new Card("Туз", "Пики", true);
 
         Assertions.assertFalse(player.addCard(jackOfHearts));
         Assertions.assertFalse(player.addCard(jackOfSpades));
@@ -69,7 +70,7 @@ public class TestPlayer {
     public void testToString0() throws Exception {
         Player player = new Player();
 
-        Card jackOfHearts = new Card(13 * 2 + 9, false);
+        Card jackOfHearts = new Card("Валет", "Черви", false);
         player.addCard(jackOfHearts);
 
         String expectedMessage = "[" + closeCard + "]";
@@ -80,7 +81,7 @@ public class TestPlayer {
     public void testToString1() throws Exception {
         Player player = new Player();
 
-        Card jackOfHearts = new Card(13 * 2 + 9, true);
+        Card jackOfHearts = new Card("Валет", "Черви", true);
         player.addCard(jackOfHearts);
 
         String expectedMessage = "[Валет Черви (10)] ==> 10";
@@ -91,8 +92,8 @@ public class TestPlayer {
     public void testToString2() throws Exception {
         Player player = new Player();
 
-        Card jackOfHearts = new Card(13 * 2 + 9, true);
-        Card aceOfHearts = new Card(13 * 2 + 12, false);
+        Card jackOfHearts = new Card("Валет", "Черви", true);
+        Card aceOfHearts = new Card("Туз", "Черви", false);
 
         player.addCard(jackOfHearts);
         player.addCard(aceOfHearts);
@@ -105,9 +106,9 @@ public class TestPlayer {
     public void testToString3() throws Exception {
         Player player = new Player();
 
-        Card jackOfHearts = new Card(13 * 2 + 9, true);
-        Card aceOfHearts = new Card(13 * 2 + 12, true);
-        Card aceOfSpades = new Card(13 * 3 + 12, true);
+        Card jackOfHearts = new Card("Валет", "Черви", true);
+        Card aceOfHearts = new Card("Туз", "Черви", true);
+        Card aceOfSpades = new Card("Туз", "Пики", true);
 
         player.addCard(jackOfHearts);
         player.addCard(aceOfHearts);
@@ -121,10 +122,10 @@ public class TestPlayer {
     public void testToString4() throws Exception {
         Player player = new Player();
 
-        Card jackOfHearts = new Card(13 * 2 + 9, true);
-        Card jackOfSpades = new Card(13 * 3 + 9, true);
-        Card aceOfHearts = new Card(13 * 2 + 12, true);
-        Card aceOfSpades = new Card(13 * 3 + 12, true);
+        Card jackOfHearts = new Card("Валет", "Черви", true);
+        Card jackOfSpades = new Card("Валет", "Пики", true);
+        Card aceOfHearts = new Card("Туз", "Черви", true);
+        Card aceOfSpades = new Card("Туз", "Пики", true);
 
         player.addCard(jackOfHearts);
         player.addCard(jackOfSpades);

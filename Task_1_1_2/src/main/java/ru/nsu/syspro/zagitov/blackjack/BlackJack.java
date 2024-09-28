@@ -1,5 +1,9 @@
 package ru.nsu.syspro.zagitov.blackjack;
 
+import ru.nsu.syspro.zagitov.blackjack.cards.Card;
+import ru.nsu.syspro.zagitov.blackjack.cards.Rank;
+import ru.nsu.syspro.zagitov.blackjack.cards.Suit;
+
 import static ru.nsu.syspro.zagitov.blackjack.Constants.blackJack;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.continueUpCard;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.dealerLimit;
@@ -82,8 +86,12 @@ public class BlackJack {
      */
     private void setCards() throws Exception {
         this.cards = new ArrayList<>(this.countDecks * numberOfCards);
-        for (int i = 0; i < this.countDecks * numberOfCards; i++) {
-            this.cards.add(new Card(i, true));
+        for (int i = 0; i < this.countDecks; i++) {
+            for (Suit suit : Suit.values()) {
+                for (Rank rank : Rank.values()) {
+                    this.cards.add(new Card(rank.getName(), suit.getName(), true));
+                }
+            }
         }
         shuffleCards();
     }
@@ -121,8 +129,8 @@ public class BlackJack {
 
             int scorePlayer = 0;
             int scoreDealer = 0;
-            for (int roundNumber = 1; roundNumber <= this.countRounds; roundNumber++) {
-                int resultRound = round(console, roundNumber);
+            for (int roundNumber = 0; roundNumber < this.countRounds; roundNumber++) {
+                int resultRound = round(console, roundNumber + 1);
                 scorePlayer += (resultRound > 0 ? 1 : 0);
                 scoreDealer += (resultRound < 0 ? 1 : 0);
 

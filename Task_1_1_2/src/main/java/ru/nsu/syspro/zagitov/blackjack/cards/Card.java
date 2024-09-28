@@ -1,34 +1,34 @@
-package ru.nsu.syspro.zagitov.blackjack;
+package ru.nsu.syspro.zagitov.blackjack.cards;
 
 import static ru.nsu.syspro.zagitov.blackjack.Constants.closeCard;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.indexAce;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.numberOfCards;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.numberOfRanks;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.overflowAce;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.ranks;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.suits;
 
 
 /**
  * Class card.
  */
 public class Card {
+    private final Rank rank;
+    private final Suit suit;
     private int overflow;
-    private final int index;
     public boolean faceUp;
 
     /**
      * create instance of the class.
      *
-     * @param index in the range [0, {@code numberOfCards - 1}].
+     * @param rank is string name card.
+     * @param suit is string surname card.
      * @param isFaceUp shows if the card is turned over.
      */
-    public Card(int index, boolean isFaceUp)  throws Exception {
-        if (index < 0) {
-            throw new Exception("Card index cannot be negative");
+    public Card(String rank, String suit, boolean isFaceUp)  throws Exception {
+
+        try {
+            this.rank = Rank.findByName(rank);
+            this.suit = Suit.findByName(suit);
+        } catch (IllegalArgumentException e) {
+            throw new Exception("Wrong card!");
         }
         this.overflow = 0;
-        this.index = index % numberOfCards;
         this.faceUp = isFaceUp;
     }
 
@@ -36,7 +36,9 @@ public class Card {
      * setup overflow. if card is Ace, this.overflow = -10.
      * */
     public void setOverflow() {
-        this.overflow = ((index % numberOfRanks) == indexAce ? -overflowAce : 0);
+        if (rank == Rank.ACE) {
+            this.overflow = -overflowAce;
+        }
     }
 
     /**
@@ -58,8 +60,7 @@ public class Card {
     @Override
     public String toString() {
         if (faceUp) {
-            return ranks[index % numberOfRanks] + " "
-                    + suits[index / numberOfRanks] + " (" + getPrice() + ")";
+            return rank.getName() + " " + suit.getName() + " (" + getPrice() + ")";
         }
         return closeCard;
     }
@@ -73,7 +74,6 @@ public class Card {
         if (!faceUp) {
             return 0;
         }
-        int t = index % numberOfRanks;
-        return Math.min(t + 2, 10) + (t == indexAce ? 1 : 0) + overflow;
+        return rank.getPoints() + overflow;
     }
 }
