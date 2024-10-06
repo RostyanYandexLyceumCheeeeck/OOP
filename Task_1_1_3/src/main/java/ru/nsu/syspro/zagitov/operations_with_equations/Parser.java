@@ -115,6 +115,8 @@ public class Parser {
                 Expression right = stack.pop();
                 Expression left = stack.pop();
                 stack.push(stringToOperation(expression, left, right));
+            } else {
+                throw new IllegalArgumentException("Expression is not a valid!");
             }
         }
         return stack.pop();
