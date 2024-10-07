@@ -6,6 +6,9 @@ import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Class is parser strings.
+ */
 public class Parser {
     final static Pattern patternBrackets = Pattern.compile("[()]");
     final static Pattern patternNumber = Pattern.compile("[-+]?\\d+");
@@ -15,6 +18,12 @@ public class Parser {
             patternVariable.pattern() + "|" + patternNumber.pattern()
     );
 
+    /**
+     * get priority is operation.
+     *
+     * @param operation string operation (+/-*).
+     * @return int priority.
+     */
     private static int getPriority(String operation) {
         return switch (operation) {
             case "-", "+" -> 0;
@@ -23,10 +32,22 @@ public class Parser {
         };
     }
 
+    /**
+     * convert string to instance Expression.
+     *
+     * @param expression string representation of an expression. Example: 3 - 6/2.
+     * @return instance Expression.
+     */
     public static Expression stringToExpression(String expression) {
         return arrayRpnToExpression(stringExpressionToArrayRPN(expression));
     }
 
+    /**
+     * convert string to array RPN(Reverse Polish Notation).
+     *
+     * @param expression string representation of an expression. Example: 3 - 6/2.
+     * @return array RPN. Example: 3 - 6/2 ==> ["3", "6", "2", "/", "-"].
+     */
     protected static ArrayList<String> stringExpressionToArrayRPN(String expression) {
         ArrayList<String> arrayExpression = new ArrayList<>();
         ArrayList<String> result = new ArrayList<>();
@@ -51,6 +72,15 @@ public class Parser {
         return result;
     }
 
+    /**
+     * recursive convert string to array RPN.
+     *
+     * @param arrayExpression expression is array.
+     *                        Example: (3 - 6/2) ==> ["(", "3", "-", "6", "/", "2", ")"].
+     * @param start           index start in the arrayExpression.
+     * @param result          array RPN.
+     * @return index ending in the arrayExpression.
+     */
     private static int recurseStringExprToRPN(ArrayList<String> arrayExpression,
                                        int start, ArrayList<String> result) {
         Stack<String> stack = new Stack<>();
@@ -81,16 +111,30 @@ public class Parser {
         return i;
     }
 
-    private static Expression stringToNumOrVar(String expression) {
-        boolean isNumberOrVariable = Pattern.matches(patternNumAndVar.pattern(), expression);
+    /**
+     * convert string value to instance Number or Variable.
+     *
+     * @param value string name variable or string integer.
+     * @return instance Number or Variable.
+     */
+    private static Expression stringToNumOrVar(String value) {
+        boolean isNumberOrVariable = Pattern.matches(patternNumAndVar.pattern(), value);
         if (!isNumberOrVariable) {
-            throw new IllegalArgumentException("Expression \"" + expression +
+            throw new IllegalArgumentException("Value \"" + value +
                     "\" is not a Number or Variable!");
         }
-        return (Pattern.matches(patternNumber.pattern(), expression) ?
-                new Number(Integer.parseInt(expression)) : new Variable(expression));
+        return (Pattern.matches(patternNumber.pattern(), value) ?
+                new Number(Integer.parseInt(value)) : new Variable(value));
     }
 
+    /**
+     * convert string operation and two Expression to instance Add or Sub or Mul or Div.
+     *
+     * @param expression string operation.
+     * @param left       left instance Expression.
+     * @param right      right instance Expression.
+     * @return instance Add or Sub or Mul or Div.
+     */
     private static Expression stringToOperation(
             String expression, Expression left, Expression right)
     {
@@ -104,6 +148,12 @@ public class Parser {
         };
     }
 
+    /**
+     * convert array RPN to instance Expression.
+     *
+     * @param arrayRpnExp array RPN. Example: 3 - 6/2 ==> ["3", "6", "2", "/", "-"].
+     * @return instance Expression.
+     */
     protected static Expression arrayRpnToExpression(ArrayList<String> arrayRpnExp) {
         Stack<Expression> stack = new Stack<>();
 

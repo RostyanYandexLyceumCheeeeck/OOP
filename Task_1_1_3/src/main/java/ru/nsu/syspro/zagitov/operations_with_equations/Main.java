@@ -8,7 +8,7 @@ public class Main {
 
         Expression de = e.derivative("x");
         System.out.println(de.toString());
-
+        Number n = new Number(13);
         int result = e.eval("x = 10; y = 13");
         int result1 = e.eval("x = 0; y = 13");
         int result2 = e.eval("x = -0; y = 13");

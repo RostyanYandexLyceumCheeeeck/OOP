@@ -2,23 +2,33 @@ package ru.nsu.syspro.zagitov.operations_with_equations;
 
 import java.util.ArrayList;
 
+/**
+ * Class is number.
+ */
 public class Number extends Expression {
     int number;
 
+    /**
+     * Constructor classes Number.
+     *
+     * @param number int value.
+     */
     public Number(int number) {
         this.number = number;
     }
 
+    @Override
     public String toString() {
         return String.valueOf(number);
     }
 
+    @Override
     public Expression derivative(String variable) {
         return new Number(0);
     }
 
-    protected int __eval__(ArrayList<String> names, ArrayList<Integer> values) {
+    @Override
+    protected int protectedEval(ArrayList<String> names, ArrayList<Integer> values) {
         return number;
     }
-
 }

@@ -4,17 +4,24 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Base class expression.
+ */
 public abstract class Expression {
-    protected Expression derivative(String variable) {
-        return null;
-    }
+    public abstract Expression derivative(String variable);
 
+    /**
+     * Denoting variables and calculating expressions.
+     *
+     * @param variables variables and values in the format: (x = 10; y = -13; ...).
+     * @return calculating expressions.
+     */
     public int eval(String variables) {
         String[] tokens = variables.split(";");
         Pattern pattern = Pattern.compile(
                 "(" + Parser.patternVariable.pattern() + ")\\s*=\\s*(" +
                         Parser.patternNumber.pattern() + ")"
-        );  // x = 10
+        );
         ArrayList<String> names = new ArrayList<>();
         ArrayList<Integer> values = new ArrayList<>();
 
@@ -26,13 +33,27 @@ public abstract class Expression {
             names.add(matcher.group(1));
             values.add(Integer.valueOf(matcher.group(2)));
         }
-        return __eval__(names, values);
+        return protectedEval(names, values);
     }
 
-    public Expression convertString(String expression) {
+    /**
+     * Recursive eval.
+     *
+     * @param names  is strings names variables.
+     * @param values is integers value variables.
+     * @return calculating expressions.
+     */
+    protected abstract int protectedEval(ArrayList<String> names, ArrayList<Integer> values);
+
+    /**
+     * Convert string expression to instance Expression.
+     *
+     * @param expression string representation of an expression. Example: 3 - 6/2.
+     * @return instance Expression.
+     */
+    public Expression convertStringToExpression(String expression) {
         return Parser.stringToExpression(expression);
     }
-
-    protected abstract int __eval__(ArrayList<String> names, ArrayList<Integer> values);
 }
+
 
