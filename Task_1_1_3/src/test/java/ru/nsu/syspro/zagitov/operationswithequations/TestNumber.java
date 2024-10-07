@@ -1,11 +1,14 @@
-package ru.nsu.syspro.zagitov.operations_with_equations;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+package ru.nsu.syspro.zagitov.operationswithequations;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+/**
+ * Class testing Number.
+ */
 public class TestNumber {
 
     @Test

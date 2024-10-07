@@ -1,115 +1,122 @@
-package ru.nsu.syspro.zagitov.operations_with_equations;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+package ru.nsu.syspro.zagitov.operationswithequations;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class TestDiv {
-    static class TestProtectedEvalDiv extends Div {
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-        public TestProtectedEvalDiv(Expression left, Expression right) {
+/**
+ * Class testing Mul.
+ */
+public class TestSub {
+    /**
+     * Class testing method protectedEval in Mul.
+     */
+    static class TestProtectedEvalSub extends Sub {
+        /**
+         * Constructor.
+         *
+         * @param left  left instance Expression.
+         * @param right right instance Expression.
+         */
+        public TestProtectedEvalSub(Expression left, Expression right) {
             super(left, right);
         }
-
-        public int getProtectedEval(ArrayList<String> names, ArrayList<Integer> values) {
-            return protectedEval(names, values);
-        }
     }
-
+    
     @Test
     void testToStringNumberAndNumber() {
-        Div div = new Div(new Number(10), new Number(20));
-        Assertions.assertEquals("(10/20)", div.toString());
+        Sub sub = new Sub(new Number(10), new Number(20));
+        Assertions.assertEquals("(10-20)", sub.toString());
     }
 
     @Test
     void testToStringNumberAndVariable() {
-        Div div = new Div(new Number(10), new Variable("zxc"));
-        Assertions.assertEquals("(10/zxc)", div.toString());
+        Sub sub = new Sub(new Number(10), new Variable("zxc"));
+        Assertions.assertEquals("(10-zxc)", sub.toString());
     }
 
     @Test
     void testToStringVariableAndVariable() {
-        Div div = new Div(new Variable("asd"), new Variable("zxc"));
-        Assertions.assertEquals("(asd/zxc)", div.toString());
+        Sub sub = new Sub(new Variable("asd"), new Variable("zxc"));
+        Assertions.assertEquals("(asd-zxc)", sub.toString());
     }
 
     @Test
     void testDerivativeNumberAndNumber() {
-        Div div = new Div(new Number(10), new Number(20));
-        Expression newDiv = div.derivative("");
-        Assertions.assertEquals("(((0*20)-(10*0))/(20*20))", newDiv.toString());
+        Sub sub = new Sub(new Number(10), new Number(20));
+        Expression newSub = sub.derivative("");
+        Assertions.assertEquals("(0-0)", newSub.toString());
     }
 
     @Test
     void testDerivativeNumberAndVariable0() {
-        Div div = new Div(new Number(10), new Variable("zxc"));
-        Expression newDiv = div.derivative("");
-        Assertions.assertEquals("(((0*zxc)-(10*0))/(zxc*zxc))", newDiv.toString());
+        Sub sub = new Sub(new Number(10), new Variable("zxc"));
+        Expression newSub = sub.derivative("");
+        Assertions.assertEquals("(0-0)", newSub.toString());
     }
 
     @Test
     void testDerivativeNumberAndVariable1() {
-        Div div = new Div(new Number(10), new Variable("zxc"));
-        Expression newDiv = div.derivative("z");
-        Assertions.assertEquals("(((0*zxc)-(10*0))/(zxc*zxc))", newDiv.toString());
+        Sub sub = new Sub(new Number(10), new Variable("zxc"));
+        Expression newSub = sub.derivative("z");
+        Assertions.assertEquals("(0-0)", newSub.toString());
     }
 
     @Test
     void testDerivativeNumberAndVariable2() {
-        Div div = new Div(new Number(10), new Variable("zxc"));
-        Expression newDiv = div.derivative("zx");
-        Assertions.assertEquals("(((0*zxc)-(10*0))/(zxc*zxc))", newDiv.toString());
+        Sub sub = new Sub(new Number(10), new Variable("zxc"));
+        Expression newSub = sub.derivative("zx");
+        Assertions.assertEquals("(0-0)", newSub.toString());
     }
 
     @Test
     void testDerivativeNumberAndVariable3() {
-        Div div = new Div(new Number(10), new Variable("zxc"));
-        Expression newDiv = div.derivative("zXc");
-        Assertions.assertEquals("(((0*zxc)-(10*0))/(zxc*zxc))", newDiv.toString());
+        Sub sub = new Sub(new Number(10), new Variable("zxc"));
+        Expression newSub = sub.derivative("zXc");
+        Assertions.assertEquals("(0-0)", newSub.toString());
     }
 
     @Test
     void testDerivativeNumberAndVariable4() {
-        Div div = new Div(new Number(10), new Variable("zxc"));
-        Expression newDiv = div.derivative("zxc");
-        Assertions.assertEquals("(((0*zxc)-(10*1))/(zxc*zxc))", newDiv.toString());
+        Sub sub = new Sub(new Number(10), new Variable("zxc"));
+        Expression newSub = sub.derivative("zxc");
+        Assertions.assertEquals("(0-1)", newSub.toString());
     }
 
     @Test
     void testDerivativeVariableAndVariable() {
-        Div div = new Div(new Variable("x"), new Variable("zxc"));
-        Expression newDiv = div.derivative("z");
-        Assertions.assertEquals("(((0*zxc)-(x*0))/(zxc*zxc))", newDiv.toString());
+        Sub sub = new Sub(new Variable("x"), new Variable("zxc"));
+        Expression newSub = sub.derivative("z");
+        Assertions.assertEquals("(0-0)", newSub.toString());
     }
 
     @Test
     void testDerivativeVariableAndVariableLeft() {
-        Div div = new Div(new Variable("x"), new Variable("zxc"));
-        Expression newDiv = div.derivative("x");
-        Assertions.assertEquals("(((1*zxc)-(x*0))/(zxc*zxc))", newDiv.toString());
+        Sub sub = new Sub(new Variable("x"), new Variable("zxc"));
+        Expression newSub = sub.derivative("x");
+        Assertions.assertEquals("(1-0)", newSub.toString());
     }
 
     @Test
     void testDerivativeVariableAndVariableRight() {
-        Div div = new Div(new Variable("x"), new Variable("zxc"));
+        Sub sub = new Sub(new Variable("x"), new Variable("zxc"));
 
-        Expression newDiv = div.derivative("zxc");
-        Assertions.assertEquals("(((0*zxc)-(x*1))/(zxc*zxc))", newDiv.toString());
+        Expression newSub = sub.derivative("zxc");
+        Assertions.assertEquals("(0-1)", newSub.toString());
     }
 
     @Test
     void testProtectedEvalNumberAndNumber() {
         Number left = new Number(10);
         Number right = new Number(20);
-        TestProtectedEvalDiv testDiv = new TestProtectedEvalDiv(left, right);
+        TestProtectedEvalSub testSub = new TestProtectedEvalSub(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zXc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
-        int divEval = testDiv.getProtectedEval(names, values);
-        Assertions.assertEquals(0, divEval);
+        int subEval = testSub.protectedEval(names, values);
+        Assertions.assertEquals(-10, subEval);
     }
 
     @Test
@@ -118,13 +125,13 @@ public class TestDiv {
         Number left = new Number(10);
         Variable right = new Variable(value);
 
-        TestProtectedEvalDiv testDiv = new TestProtectedEvalDiv(left, right);
+        TestProtectedEvalSub testSub = new TestProtectedEvalSub(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zXc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
         ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int divEval = testDiv.getProtectedEval(names, values);
-            Assertions.assertEquals(10, divEval);
+            int subEval = testSub.protectedEval(names, values);
+            Assertions.assertEquals(10, subEval);
         });
 
         String expectedMessage = "Arithmetic Error! \"" + value + "\" not found!";
@@ -138,11 +145,11 @@ public class TestDiv {
         Number left = new Number(10);
         Variable right = new Variable(value);
 
-        TestProtectedEvalDiv testDiv = new TestProtectedEvalDiv(left, right);
+        TestProtectedEvalSub testSub = new TestProtectedEvalSub(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
-        Assertions.assertEquals(1, testDiv.getProtectedEval(names, values));
+        Assertions.assertEquals(0, testSub.protectedEval(names, values));
     }
 
     @Test
@@ -152,13 +159,13 @@ public class TestDiv {
         Variable left = new Variable(valueLeft);
         Variable right = new Variable(valueRight);
 
-        TestProtectedEvalDiv testDiv = new TestProtectedEvalDiv(left, right);
+        TestProtectedEvalSub testSub = new TestProtectedEvalSub(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("x", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
         ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int divEval = testDiv.getProtectedEval(names, values);
-            Assertions.assertEquals(10, divEval);
+            int subEval = testSub.protectedEval(names, values);
+            Assertions.assertEquals(10, subEval);
         });
 
         String expectedMessage = "Arithmetic Error! \"" + valueLeft + "\" not found!";
@@ -174,13 +181,13 @@ public class TestDiv {
         Variable left = new Variable(valueLeft);
         Variable right = new Variable(valueRight);
 
-        TestProtectedEvalDiv testDiv = new TestProtectedEvalDiv(left, right);
+        TestProtectedEvalSub testSub = new TestProtectedEvalSub(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
         ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int divEval = testDiv.getProtectedEval(names, values);
-            Assertions.assertEquals(10, divEval);
+            int subEval = testSub.protectedEval(names, values);
+            Assertions.assertEquals(10, subEval);
         });
 
         String expectedMessage = "Arithmetic Error! \"" + valueRight + "\" not found!";
@@ -194,13 +201,13 @@ public class TestDiv {
         Variable left = new Variable(value);
         Variable right = new Variable(value);
 
-        TestProtectedEvalDiv testDiv = new TestProtectedEvalDiv(left, right);
+        TestProtectedEvalSub testSub = new TestProtectedEvalSub(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
         ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int divEval = testDiv.getProtectedEval(names, values);
-            Assertions.assertEquals(10, divEval);
+            int subEval = testSub.protectedEval(names, values);
+            Assertions.assertEquals(10, subEval);
         });
 
         String expectedMessage = "Arithmetic Error! \"" + value + "\" not found!";
@@ -215,11 +222,11 @@ public class TestDiv {
         Variable left = new Variable(valueLeft);
         Variable right = new Variable(valueRight);
 
-        TestProtectedEvalDiv testDiv = new TestProtectedEvalDiv(left, right);
+        TestProtectedEvalSub testSub = new TestProtectedEvalSub(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "zxc"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
-        Assertions.assertEquals(0, testDiv.getProtectedEval(names, values));
+        Assertions.assertEquals(-3, testSub.protectedEval(names, values));
     }
 
     @Test
@@ -228,45 +235,66 @@ public class TestDiv {
         Variable left = new Variable(value);
         Variable right = new Variable(value);
 
-        TestProtectedEvalDiv testDiv = new TestProtectedEvalDiv(left, right);
+        TestProtectedEvalSub testSub = new TestProtectedEvalSub(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
-        Assertions.assertEquals(1, testDiv.getProtectedEval(names, values));
+        Assertions.assertEquals(0, testSub.protectedEval(names, values));
     }
 
     @Test
     void testEvalNumberAndNumber() {
-        Expression expression = new Div(new Number(10), new Number(13));
+        Expression expression = new Sub(new Number(10), new Number(13));
         int result = expression.eval("x = 22; y = 33");
-        Assertions.assertEquals(0, result);
+        Assertions.assertEquals(-3, result);
     }
 
     @Test
     void testEvalNumberAndVariable0() {
-        Expression expression = new Div(new Number(10), new Variable("_zxc"));
+        Expression expression = new Sub(new Number(10), new Variable("_zxc"));
         int result = expression.eval("x = 19; _zxc = -10");
-        Assertions.assertEquals(-1, result);
+        Assertions.assertEquals(20, result);
     }
 
     @Test
     void testEvalNumberAndVariable1() {
-        Expression expression = new Div(new Number(10), new Variable("__"));
+        Expression expression = new Sub(new Number(10), new Variable("__"));
         int result = expression.eval("x = 19; __ = 10");
-        Assertions.assertEquals(1, result);
-    }
-
-    @Test
-    void testEvalNumberAndVariable3() {
-        Expression expression = new Div(new Number(10), new Variable("_123"));
-        int result = expression.eval("x = 19; _123 = +123");
         Assertions.assertEquals(0, result);
     }
 
     @Test
+    void testEvalNumberAndVariable3() {
+        Expression expression = new Sub(new Number(10), new Variable("_123"));
+        int result = expression.eval("x = 19; _123 = +123");
+        Assertions.assertEquals(-113, result);
+    }
+
+    @Test
+    void testEvalVariableAndVariable0() {
+        Expression expression = new Sub(new Variable("x"), new Variable("yY"));
+        int result = expression.eval("x = 19; yY =      0");
+        Assertions.assertEquals(19, result);
+    }
+
+    @Test
+    void testEvalVariableAndVariable1() {
+        Expression expression = new Sub(new Variable("x"), new Variable("yY"));
+        int result = expression.eval("x = 19; yY =      -0");
+        Assertions.assertEquals(19, result);
+    }
+
+    @Test
+    void testEvalVariableAndVariable2() {
+        Expression expression = new Sub(new Variable("x"), new Variable("yY"));
+        int result = expression.eval("x = -19; yY =      0");
+        Assertions.assertEquals(-19, result);
+    }
+
+    @Test
     void testEvalVariableAndVariable3() {
-        Expression expression = new Div(new Variable("x"), new Variable("yY"));
-        int result = expression.eval("x = -162; yY =    81");
-        Assertions.assertEquals(-2, result);
+        Expression expression = new Sub(new Variable("x"), new Variable("yY"));
+        int result = expression.eval("x = -19; yY =    -81");
+        Assertions.assertEquals(62, result);
     }
 }

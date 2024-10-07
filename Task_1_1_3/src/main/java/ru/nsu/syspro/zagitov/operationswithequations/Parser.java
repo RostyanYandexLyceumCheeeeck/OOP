@@ -1,4 +1,4 @@
-package ru.nsu.syspro.zagitov.operations_with_equations;
+package ru.nsu.syspro.zagitov.operationswithequations;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -25,11 +25,18 @@ public class Parser {
      * @return int priority.
      */
     private static int getPriority(String operation) {
-        return switch (operation) {
-            case "-", "+" -> 0;
-            case "*", "/" -> 1;
-            default -> -1;
-        };
+        switch (operation) {
+            case "+":
+                return 0;
+            case "-":
+                return 0;
+            case "*":
+                return 1;
+            case "/":
+                return 1;
+            default:
+                return -1;
+        }
     }
 
     /**
@@ -131,21 +138,26 @@ public class Parser {
      * convert string operation and two Expression to instance Add or Sub or Mul or Div.
      *
      * @param expression string operation.
-     * @param left       left instance Expression.
-     * @param right      right instance Expression.
+     * @param left left instance Expression.
+     * @param right right instance Expression.
      * @return instance Add or Sub or Mul or Div.
      */
     private static Expression stringToOperation(
             String expression, Expression left, Expression right)
     {
-        return switch (expression) {
-            case "+" -> new Add(left, right);
-            case "-" -> new Sub(left, right);
-            case "*" -> new Mul(left, right);
-            case "/" -> new Div(left, right);
-            default -> throw new IllegalArgumentException("Expression \"" + expression +
+        switch (expression) {
+            case "+":
+                return new Add(left, right);
+            case "-":
+                return new Sub(left, right);
+            case "*":
+                return new Mul(left, right);
+            case "/":
+                return new Div(left, right);
+            default:
+                throw new IllegalArgumentException("Expression \"" + expression +
                     "\" is not a valid operation!");
-        };
+        }
     }
 
     /**

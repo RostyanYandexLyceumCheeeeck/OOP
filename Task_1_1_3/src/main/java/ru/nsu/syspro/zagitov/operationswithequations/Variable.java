@@ -1,4 +1,4 @@
-package ru.nsu.syspro.zagitov.operations_with_equations;
+package ru.nsu.syspro.zagitov.operationswithequations;
 
 import java.util.ArrayList;
 import java.util.Objects;

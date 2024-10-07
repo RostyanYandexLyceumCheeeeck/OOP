@@ -1,20 +1,26 @@
-package ru.nsu.syspro.zagitov.operations_with_equations;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+package ru.nsu.syspro.zagitov.operationswithequations;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class TestVariable {
-    static class TestProtectedEvalVariable extends Variable {
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
+/**
+ * Class testing Variable.
+ */
+public class TestVariable {
+    /**
+     * Class testing method protectedEval in Variable.
+     */
+    static class TestProtectedEvalVariable extends Variable {
+        /**
+         * Constructor.
+         *
+         * @param value is string name variable.
+         */
         public TestProtectedEvalVariable(String value) {
             super(value);
-        }
-
-        public int getProtectedEval(ArrayList<String> names, ArrayList<Integer> values) {
-            return protectedEval(names, values);
         }
     }
 
@@ -65,7 +71,7 @@ public class TestVariable {
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
         ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int variableEval = testVariable.getProtectedEval(names, values);
+            int variableEval = testVariable.protectedEval(names, values);
             Assertions.assertEquals(10, variableEval);
         });
 
@@ -82,7 +88,7 @@ public class TestVariable {
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
         ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int variableEval = testVariable.getProtectedEval(names, values);
+            int variableEval = testVariable.protectedEval(names, values);
             Assertions.assertEquals(10, variableEval);
         });
 
@@ -99,7 +105,7 @@ public class TestVariable {
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
         ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int variableEval = testVariable.getProtectedEval(names, values);
+            int variableEval = testVariable.protectedEval(names, values);
             Assertions.assertEquals(10, variableEval);
         });
 
@@ -115,6 +121,6 @@ public class TestVariable {
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
-        Assertions.assertEquals(10, testVariable.getProtectedEval(names, values));
+        Assertions.assertEquals(10, testVariable.protectedEval(names, values));
     }
 }

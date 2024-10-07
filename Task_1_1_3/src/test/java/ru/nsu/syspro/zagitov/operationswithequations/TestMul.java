@@ -1,20 +1,27 @@
-package ru.nsu.syspro.zagitov.operations_with_equations;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+package ru.nsu.syspro.zagitov.operationswithequations;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class TestMul {
-    static class TestProtectedEvalMul extends Mul {
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
+/**
+ * Class testing Mul.
+ */
+public class TestMul {
+    /**
+     * Class testing method protectedEval in Mul.
+     */
+    static class TestProtectedEvalMul extends Mul {
+        /**
+         * Constructor.
+         *
+         * @param left  left instance Expression.
+         * @param right right instance Expression.
+         */
         public TestProtectedEvalMul(Expression left, Expression right) {
             super(left, right);
-        }
-
-        public int getProtectedEval(ArrayList<String> names, ArrayList<Integer> values) {
-            return protectedEval(names, values);
         }
     }
 
@@ -108,7 +115,7 @@ public class TestMul {
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zXc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
-        int mulEval = testMul.getProtectedEval(names, values);
+        int mulEval = testMul.protectedEval(names, values);
         Assertions.assertEquals(200, mulEval);
     }
 
@@ -123,7 +130,7 @@ public class TestMul {
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
         ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int mulEval = testMul.getProtectedEval(names, values);
+            int mulEval = testMul.protectedEval(names, values);
             Assertions.assertEquals(10, mulEval);
         });
 
@@ -142,7 +149,7 @@ public class TestMul {
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
-        Assertions.assertEquals(100, testMul.getProtectedEval(names, values));
+        Assertions.assertEquals(100, testMul.protectedEval(names, values));
     }
 
     @Test
@@ -157,7 +164,7 @@ public class TestMul {
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
         ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int mulEval = testMul.getProtectedEval(names, values);
+            int mulEval = testMul.protectedEval(names, values);
             Assertions.assertEquals(10, mulEval);
         });
 
@@ -179,7 +186,7 @@ public class TestMul {
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
         ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int mulEval = testMul.getProtectedEval(names, values);
+            int mulEval = testMul.protectedEval(names, values);
             Assertions.assertEquals(10, mulEval);
         });
 
@@ -199,7 +206,7 @@ public class TestMul {
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
         ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int mulEval = testMul.getProtectedEval(names, values);
+            int mulEval = testMul.protectedEval(names, values);
             Assertions.assertEquals(10, mulEval);
         });
 
@@ -219,7 +226,7 @@ public class TestMul {
         ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "zxc"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
-        Assertions.assertEquals(130, testMul.getProtectedEval(names, values));
+        Assertions.assertEquals(130, testMul.protectedEval(names, values));
     }
 
     @Test
@@ -232,7 +239,7 @@ public class TestMul {
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
-        Assertions.assertEquals(100, testMul.getProtectedEval(names, values));
+        Assertions.assertEquals(100, testMul.protectedEval(names, values));
     }
 
     @Test
