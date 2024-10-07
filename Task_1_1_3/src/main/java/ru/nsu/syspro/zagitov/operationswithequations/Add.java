@@ -6,7 +6,8 @@ import java.util.ArrayList;
  * Class is summary.
  */
 public class Add extends Expression {
-    Expression left, right;
+    Expression left;
+    Expression right;
 
     /**
      * Constructor classes Add.

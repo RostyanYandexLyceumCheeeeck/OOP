@@ -10,11 +10,11 @@ import java.util.regex.Pattern;
  * Class is parser strings.
  */
 public class Parser {
-    final static Pattern patternBrackets = Pattern.compile("[()]");
-    final static Pattern patternNumber = Pattern.compile("[-+]?\\d+");
-    final static Pattern patternOperator = Pattern.compile("[+\\-*/]");
-    final static Pattern patternVariable = Pattern.compile("_\\w+|[A-Za-z]\\w*");
-    final static Pattern patternNumAndVar = Pattern.compile(
+    static final Pattern patternBrackets = Pattern.compile("[()]");
+    static final Pattern patternNumber = Pattern.compile("[-+]?\\d+");
+    static final Pattern patternOperator = Pattern.compile("[+\\-*/]");
+    static final Pattern patternVariable = Pattern.compile("_\\w+|[A-Za-z]\\w*");
+    static final Pattern patternNumAndVar = Pattern.compile(
             patternVariable.pattern() + "|" + patternNumber.pattern()
     );
 
@@ -46,23 +46,23 @@ public class Parser {
      * @return instance Expression.
      */
     public static Expression stringToExpression(String expression) {
-        return arrayRpnToExpression(stringExpressionToArrayRPN(expression));
+        return arrayRpnToExpression(stringExpressionToArrayRpn(expression));
     }
 
     /**
      * convert string to array RPN(Reverse Polish Notation).
      *
      * @param expression string representation of an expression. Example: 3 - 6/2.
-     * @return array RPN. Example: 3 - 6/2 ==> ["3", "6", "2", "/", "-"].
+     * @return array RPN. Example: 3 - 6/2 ⇨⇨ ["3", "6", "2", "/", "-"].
      */
-    protected static ArrayList<String> stringExpressionToArrayRPN(String expression) {
+    protected static ArrayList<String> stringExpressionToArrayRpn(String expression) {
         ArrayList<String> arrayExpression = new ArrayList<>();
         ArrayList<String> result = new ArrayList<>();
 
         expression = expression.replaceAll("\\s+", "");
         Pattern patternExpression  = Pattern.compile(
-                "(" + patternBrackets.pattern() + "|" + patternOperator.pattern() +
-                        "|" + patternNumAndVar.pattern() + ")"
+                "(" + patternBrackets.pattern() + "|" + patternOperator.pattern()
+                        + "|" + patternNumAndVar.pattern() + ")"
         );
         Matcher matcher = patternExpression.matcher(expression);
 
@@ -74,7 +74,7 @@ public class Parser {
         if (controlSum != expression.length()) {
             throw new IllegalArgumentException("Expression \"" + expression + "\" is not a valid!");
         }
-        recurseStringExprToRPN(arrayExpression, 0, result);
+        recurseStringExprToRpn(arrayExpression, 0, result);
 
         return result;
     }
@@ -83,12 +83,12 @@ public class Parser {
      * recursive convert string to array RPN.
      *
      * @param arrayExpression expression is array.
-     *                        Example: (3 - 6/2) ==> ["(", "3", "-", "6", "/", "2", ")"].
+     *                        Example: (3 - 6/2) ⇨⇨ ["(", "3", "-", "6", "/", "2", ")"].
      * @param start           index start in the arrayExpression.
      * @param result          array RPN.
      * @return index ending in the arrayExpression.
      */
-    private static int recurseStringExprToRPN(ArrayList<String> arrayExpression,
+    private static int recurseStringExprToRpn(ArrayList<String> arrayExpression,
                                        int start, ArrayList<String> result) {
         Stack<String> stack = new Stack<>();
         int i;
@@ -101,7 +101,7 @@ public class Parser {
                 if (Objects.equals(expression, ")")) {
                     break;
                 } // else
-                i = recurseStringExprToRPN(arrayExpression, i + 1, result);
+                i = recurseStringExprToRpn(arrayExpression, i + 1, result);
             } else if (isOperator) {
                 while (!stack.empty() && getPriority(stack.peek()) >= getPriority(expression)) {
                     result.add(stack.pop());
@@ -127,11 +127,11 @@ public class Parser {
     private static Expression stringToNumOrVar(String value) {
         boolean isNumberOrVariable = Pattern.matches(patternNumAndVar.pattern(), value);
         if (!isNumberOrVariable) {
-            throw new IllegalArgumentException("Value \"" + value +
-                    "\" is not a Number or Variable!");
+            throw new IllegalArgumentException("Value \"" + value
+                    + "\" is not a Number or Variable!");
         }
-        return (Pattern.matches(patternNumber.pattern(), value) ?
-                new Number(Integer.parseInt(value)) : new Variable(value));
+        return (Pattern.matches(patternNumber.pattern(), value)
+                ? new Number(Integer.parseInt(value)) : new Variable(value));
     }
 
     /**
@@ -143,8 +143,7 @@ public class Parser {
      * @return instance Add or Sub or Mul or Div.
      */
     private static Expression stringToOperation(
-            String expression, Expression left, Expression right)
-    {
+            String expression, Expression left, Expression right) {
         switch (expression) {
             case "+":
                 return new Add(left, right);
@@ -155,15 +154,15 @@ public class Parser {
             case "/":
                 return new Div(left, right);
             default:
-                throw new IllegalArgumentException("Expression \"" + expression +
-                    "\" is not a valid operation!");
+                throw new IllegalArgumentException("Expression \"" + expression
+                        + "\" is not a valid operation!");
         }
     }
 
     /**
      * convert array RPN to instance Expression.
      *
-     * @param arrayRpnExp array RPN. Example: 3 - 6/2 ==> ["3", "6", "2", "/", "-"].
+     * @param arrayRpnExp array RPN. Example: 3 - 6/2 ⇨⇨ ["3", "6", "2", "/", "-"].
      * @return instance Expression.
      */
     protected static Expression arrayRpnToExpression(ArrayList<String> arrayRpnExp) {

@@ -1,11 +1,10 @@
 package ru.nsu.syspro.zagitov.operationswithequations;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Class testing Add.

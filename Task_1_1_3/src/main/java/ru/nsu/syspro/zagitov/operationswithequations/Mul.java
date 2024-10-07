@@ -6,7 +6,8 @@ import java.util.ArrayList;
  * Class is multiplication.
  */
 public class Mul extends Expression {
-    Expression left, right;
+    Expression left;
+    Expression right;
 
     /**
      * Constructor classes Multiplication.

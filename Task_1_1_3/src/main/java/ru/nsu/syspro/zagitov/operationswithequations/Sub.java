@@ -6,7 +6,8 @@ import java.util.ArrayList;
  * Class is difference.
  */
 public class Sub extends Expression {
-    Expression left, right;
+    Expression left;
+    Expression right;
 
     /**
      * Constructor classes Sub.

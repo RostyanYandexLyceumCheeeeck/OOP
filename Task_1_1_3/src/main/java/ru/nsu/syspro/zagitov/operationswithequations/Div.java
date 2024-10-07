@@ -6,7 +6,8 @@ import java.util.ArrayList;
  * Class is division.
  */
 public class Div extends Expression {
-    Expression left, right;
+    Expression left;
+    Expression right;
 
     /**
      * Constructor classes Division.

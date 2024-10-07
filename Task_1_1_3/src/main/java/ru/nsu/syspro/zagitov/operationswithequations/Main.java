@@ -5,6 +5,8 @@ package ru.nsu.syspro.zagitov.operationswithequations;
  */
 public class Main {
     /**
+     * Start point to the program.
+     *
      * @param args arguments of command line.
      */
     public static void main(String[] args) {

@@ -19,8 +19,8 @@ public abstract class Expression {
     public int eval(String variables) {
         String[] tokens = variables.split(";");
         Pattern pattern = Pattern.compile(
-                "(" + Parser.patternVariable.pattern() + ")\\s*=\\s*(" +
-                        Parser.patternNumber.pattern() + ")"
+                "(" + Parser.patternVariable.pattern() + ")\\s*=\\s*("
+                        + Parser.patternNumber.pattern() + ")"
         );
         ArrayList<String> names = new ArrayList<>();
         ArrayList<Integer> values = new ArrayList<>();
