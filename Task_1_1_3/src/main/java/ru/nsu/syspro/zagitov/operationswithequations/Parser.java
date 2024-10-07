@@ -56,9 +56,6 @@ public class Parser {
      * @return array RPN. Example: 3 - 6/2 ⇨⇨ ["3", "6", "2", "/", "-"].
      */
     protected static ArrayList<String> stringExpressionToArrayRpn(String expression) {
-        ArrayList<String> arrayExpression = new ArrayList<>();
-        ArrayList<String> result = new ArrayList<>();
-
         expression = expression.replaceAll("\\s+", "");
         Pattern patternExpression  = Pattern.compile(
                 "(" + patternBrackets.pattern() + "|" + patternOperator.pattern()
@@ -67,6 +64,7 @@ public class Parser {
         Matcher matcher = patternExpression.matcher(expression);
 
         int controlSum = 0;
+        ArrayList<String> arrayExpression = new ArrayList<>();
         while (matcher.find()) {
             arrayExpression.add(matcher.group());
             controlSum += matcher.group().length();
@@ -74,8 +72,9 @@ public class Parser {
         if (controlSum != expression.length()) {
             throw new IllegalArgumentException("Expression \"" + expression + "\" is not a valid!");
         }
-        recurseStringExprToRpn(arrayExpression, 0, result);
 
+        ArrayList<String> result = new ArrayList<>();
+        recurseStringExprToRpn(arrayExpression, 0, result);
         return result;
     }
 
