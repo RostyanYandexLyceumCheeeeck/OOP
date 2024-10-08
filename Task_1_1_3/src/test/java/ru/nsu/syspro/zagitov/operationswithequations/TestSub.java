@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Class testing Mul.
+ * Class testing Sub.
  */
 public class TestSub {
 
