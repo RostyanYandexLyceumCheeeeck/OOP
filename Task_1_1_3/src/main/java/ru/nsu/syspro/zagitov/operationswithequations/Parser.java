@@ -73,7 +73,7 @@ public class Parser {
             isOperator = Pattern.matches(patternOperator.pattern(), matcher.group());
 
             if (twoOperators) {
-                arrayExpression.removeLast();
+                arrayExpression.remove(arrayExpression.size() - 1);
                 if (isOperator && !matcher.group().equals("+") && !matcher.group().equals("-")) {
                     throw new IllegalArgumentException("Wrong input expression: " + expression);
                 } else {
