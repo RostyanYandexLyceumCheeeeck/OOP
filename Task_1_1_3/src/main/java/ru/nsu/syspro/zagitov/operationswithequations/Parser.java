@@ -64,11 +64,30 @@ public class Parser {
         Matcher matcher = patternExpression.matcher(expression);
 
         int controlSum = 0;
+        boolean isOperator;
+        boolean twoOperators = false;
+        String lastOperator = null;
         ArrayList<String> arrayExpression = new ArrayList<>();
+
         while (matcher.find()) {
-            arrayExpression.add(matcher.group());
+            isOperator = Pattern.matches(patternOperator.pattern(), matcher.group());
+
+            if (twoOperators) {
+                arrayExpression.removeLast();
+                if (isOperator && !matcher.group().equals("+") && !matcher.group().equals("-")) {
+                    throw new IllegalArgumentException("Wrong input expression: " + expression);
+                } else {
+                    arrayExpression.add(lastOperator + matcher.group());
+                }
+            } else {
+                arrayExpression.add(matcher.group());
+            }
+
             controlSum += matcher.group().length();
+            twoOperators = (lastOperator != null) && isOperator;
+            lastOperator = (isOperator ? matcher.group() : null);
         }
+
         if (controlSum != expression.length()) {
             throw new IllegalArgumentException("Expression \"" + expression + "\" is not a valid!");
         }
