@@ -9,20 +9,6 @@ import org.junit.jupiter.api.Test;
  * Class testing Div.
  */
 public class TestDiv {
-    /**
-     * Class testing method protectedEval in Div.
-     */
-    static class TestProtectedEvalDiv extends Div {
-        /**
-         * Constructor.
-         *
-         * @param left  left instance Expression.
-         * @param right right instance Expression.
-         */
-        public TestProtectedEvalDiv(Expression left, Expression right) {
-            super(left, right);
-        }
-    }
 
     @Test
     void testToStringNumberAndNumber() {
@@ -110,7 +96,7 @@ public class TestDiv {
     void testProtectedEvalNumberAndNumber() {
         Number left = new Number(10);
         Number right = new Number(20);
-        TestProtectedEvalDiv testDiv = new TestProtectedEvalDiv(left, right);
+        Div testDiv = new Div(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zXc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -124,7 +110,7 @@ public class TestDiv {
         Number left = new Number(10);
         Variable right = new Variable(value);
 
-        TestProtectedEvalDiv testDiv = new TestProtectedEvalDiv(left, right);
+        Div testDiv = new Div(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zXc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -144,7 +130,7 @@ public class TestDiv {
         Number left = new Number(10);
         Variable right = new Variable(value);
 
-        TestProtectedEvalDiv testDiv = new TestProtectedEvalDiv(left, right);
+        Div testDiv = new Div(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -158,7 +144,7 @@ public class TestDiv {
         Variable left = new Variable(valueLeft);
         Variable right = new Variable(valueRight);
 
-        TestProtectedEvalDiv testDiv = new TestProtectedEvalDiv(left, right);
+        Div testDiv = new Div(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("x", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -180,7 +166,7 @@ public class TestDiv {
         Variable left = new Variable(valueLeft);
         Variable right = new Variable(valueRight);
 
-        TestProtectedEvalDiv testDiv = new TestProtectedEvalDiv(left, right);
+        Div testDiv = new Div(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -200,7 +186,7 @@ public class TestDiv {
         Variable left = new Variable(value);
         Variable right = new Variable(value);
 
-        TestProtectedEvalDiv testDiv = new TestProtectedEvalDiv(left, right);
+        Div testDiv = new Div(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -221,7 +207,7 @@ public class TestDiv {
         Variable left = new Variable(valueLeft);
         Variable right = new Variable(valueRight);
 
-        TestProtectedEvalDiv testDiv = new TestProtectedEvalDiv(left, right);
+        Div testDiv = new Div(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "zxc"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -234,7 +220,7 @@ public class TestDiv {
         Variable left = new Variable(value);
         Variable right = new Variable(value);
 
-        TestProtectedEvalDiv testDiv = new TestProtectedEvalDiv(left, right);
+        Div testDiv = new Div(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -274,5 +260,35 @@ public class TestDiv {
         Expression expression = new Div(new Variable("x"), new Variable("yY"));
         int result = expression.eval("x = -162; yY =    81");
         Assertions.assertEquals(-2, result);
+    }
+
+    @Test
+    void testConvertStringToExpression0() {
+        Div testDiv = new Div(
+                new Number(21),
+                new Div(
+                        new Number(42),
+                        new Number(2)
+                )
+        );
+        String expected = testDiv.toString();  // (21/(42/2))
+        Expression result = Expression.convertStringToExpression(expected);
+        Assertions.assertEquals(expected, result.toString());
+    }
+
+    @Test
+    void testConvertStringToExpression1() {
+        Div testDiv = new Div(
+                new Mul(
+                        new Number(3),
+                        new Variable("zxc")
+                ),
+                new Sub(
+                        new Number(1000),
+                        new Number(7))
+        );
+        String expected = testDiv.toString();  // ((3*zxc)/(1000-7))
+        Expression result = Expression.convertStringToExpression(expected);
+        Assertions.assertEquals(expected, result.toString());
     }
 }

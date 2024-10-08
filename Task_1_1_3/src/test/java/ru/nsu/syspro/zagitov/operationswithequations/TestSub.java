@@ -9,21 +9,7 @@ import org.junit.jupiter.api.Test;
  * Class testing Mul.
  */
 public class TestSub {
-    /**
-     * Class testing method protectedEval in Mul.
-     */
-    static class TestProtectedEvalSub extends Sub {
-        /**
-         * Constructor.
-         *
-         * @param left  left instance Expression.
-         * @param right right instance Expression.
-         */
-        public TestProtectedEvalSub(Expression left, Expression right) {
-            super(left, right);
-        }
-    }
-    
+
     @Test
     void testToStringNumberAndNumber() {
         Sub sub = new Sub(new Number(10), new Number(20));
@@ -110,7 +96,7 @@ public class TestSub {
     void testProtectedEvalNumberAndNumber() {
         Number left = new Number(10);
         Number right = new Number(20);
-        TestProtectedEvalSub testSub = new TestProtectedEvalSub(left, right);
+        Sub testSub = new Sub(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zXc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -124,7 +110,7 @@ public class TestSub {
         Number left = new Number(10);
         Variable right = new Variable(value);
 
-        TestProtectedEvalSub testSub = new TestProtectedEvalSub(left, right);
+        Sub testSub = new Sub(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zXc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -144,7 +130,7 @@ public class TestSub {
         Number left = new Number(10);
         Variable right = new Variable(value);
 
-        TestProtectedEvalSub testSub = new TestProtectedEvalSub(left, right);
+        Sub testSub = new Sub(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -158,7 +144,7 @@ public class TestSub {
         Variable left = new Variable(valueLeft);
         Variable right = new Variable(valueRight);
 
-        TestProtectedEvalSub testSub = new TestProtectedEvalSub(left, right);
+        Sub testSub = new Sub(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("x", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -180,7 +166,7 @@ public class TestSub {
         Variable left = new Variable(valueLeft);
         Variable right = new Variable(valueRight);
 
-        TestProtectedEvalSub testSub = new TestProtectedEvalSub(left, right);
+        Sub testSub = new Sub(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -200,7 +186,7 @@ public class TestSub {
         Variable left = new Variable(value);
         Variable right = new Variable(value);
 
-        TestProtectedEvalSub testSub = new TestProtectedEvalSub(left, right);
+        Sub testSub = new Sub(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -221,7 +207,7 @@ public class TestSub {
         Variable left = new Variable(valueLeft);
         Variable right = new Variable(valueRight);
 
-        TestProtectedEvalSub testSub = new TestProtectedEvalSub(left, right);
+        Sub testSub = new Sub(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "zxc"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -234,7 +220,7 @@ public class TestSub {
         Variable left = new Variable(value);
         Variable right = new Variable(value);
 
-        TestProtectedEvalSub testSub = new TestProtectedEvalSub(left, right);
+        Sub testSub = new Sub(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 

@@ -26,6 +26,11 @@ public class Div extends Expression {
     }
 
     @Override
+    public void print() {
+        System.out.println(this);
+    }
+
+    @Override
     public Expression derivative(String variable) {
         return new Div(
                 new Sub(

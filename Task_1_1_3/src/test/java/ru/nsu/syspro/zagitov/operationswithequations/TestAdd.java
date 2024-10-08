@@ -3,28 +3,12 @@ package ru.nsu.syspro.zagitov.operationswithequations;
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 /**
  * Class testing Add.
  */
 public class TestAdd {
-    /**
-     * Class testing method protectedEval in Add.
-     */
-    @Nested
-    class TestProtectedEvalAdd extends Add {
-        /**
-         * Constructor.
-         *
-         * @param left  left instance Expression.
-         * @param right right instance Expression.
-         */
-        public TestProtectedEvalAdd(Expression left, Expression right) {
-            super(left, right);
-        }
-    }
 
     @Test
     void testToStringNumberAndNumber() {
@@ -112,7 +96,7 @@ public class TestAdd {
     void testProtectedEvalNumberAndNumber() {
         Number left = new Number(10);
         Number right = new Number(20);
-        TestProtectedEvalAdd testAdd = new TestProtectedEvalAdd(left, right);
+        Add testAdd = new Add(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zXc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -126,7 +110,7 @@ public class TestAdd {
         Number left = new Number(10);
         Variable right = new Variable(value);
 
-        TestProtectedEvalAdd testAdd = new TestProtectedEvalAdd(left, right);
+        Add testAdd = new Add(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zXc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -146,7 +130,7 @@ public class TestAdd {
         Number left = new Number(10);
         Variable right = new Variable(value);
 
-        TestProtectedEvalAdd testAdd = new TestProtectedEvalAdd(left, right);
+        Add testAdd = new Add(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -160,7 +144,7 @@ public class TestAdd {
         Variable left = new Variable(valueLeft);
         Variable right = new Variable(valueRight);
 
-        TestProtectedEvalAdd testAdd = new TestProtectedEvalAdd(left, right);
+        Add testAdd = new Add(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("x", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -182,7 +166,7 @@ public class TestAdd {
         Variable left = new Variable(valueLeft);
         Variable right = new Variable(valueRight);
 
-        TestProtectedEvalAdd testAdd = new TestProtectedEvalAdd(left, right);
+        Add testAdd = new Add(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -202,7 +186,7 @@ public class TestAdd {
         Variable left = new Variable(value);
         Variable right = new Variable(value);
 
-        TestProtectedEvalAdd testAdd = new TestProtectedEvalAdd(left, right);
+        Add testAdd = new Add(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -223,7 +207,7 @@ public class TestAdd {
         Variable left = new Variable(valueLeft);
         Variable right = new Variable(valueRight);
 
-        TestProtectedEvalAdd testAdd = new TestProtectedEvalAdd(left, right);
+        Add testAdd = new Add(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "zxc"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -236,7 +220,7 @@ public class TestAdd {
         Variable left = new Variable(value);
         Variable right = new Variable(value);
 
-        TestProtectedEvalAdd testAdd = new TestProtectedEvalAdd(left, right);
+        Add testAdd = new Add(left, right);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -297,5 +281,34 @@ public class TestAdd {
         Expression expression = new Add(new Variable("x"), new Variable("yY"));
         int result = expression.eval("x = -19; yY =    -81");
         Assertions.assertEquals(-100, result);
+    }
+
+    @Test
+    void testConvertStringToExpression0() {
+        Add testAdd = new Add(
+                new Mul(
+                        new Number(3), new Number(-7)
+                ),
+                new Number(21)
+        );
+        String expected = testAdd.toString();  // ((3*-7)+21)
+        Expression result = Expression.convertStringToExpression(expected);
+        Assertions.assertEquals(expected, result.toString());
+    }
+
+    @Test
+    void testConvertStringToExpression1() {
+        Add testAdd = new Add(
+                new Mul(
+                        new Number(3),
+                        new Number(-7)
+                ),
+                new Div(
+                        new Number(1000),
+                        new Number(2))
+        );
+        String expected = testAdd.toString();  // ((3*-7)+(1000/21))
+        Expression result = Expression.convertStringToExpression(expected);
+        Assertions.assertEquals(expected, result.toString());
     }
 }

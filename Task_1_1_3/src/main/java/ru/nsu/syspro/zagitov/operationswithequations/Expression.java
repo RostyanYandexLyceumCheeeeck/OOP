@@ -28,7 +28,8 @@ public abstract class Expression {
         for (String token : tokens) {
             Matcher matcher = pattern.matcher(token);
             if (!matcher.find()) {
-                throw new RuntimeException("Invalid expression: " + token);
+                throw new IllegalArgumentException("Invalid expression: " + token
+                        + "! Example: x = 10");
             }
             names.add(matcher.group(1));
             values.add(Integer.valueOf(matcher.group(2)));
@@ -51,9 +52,14 @@ public abstract class Expression {
      * @param expression string representation of an expression. Example: 3 - 6/2.
      * @return instance Expression.
      */
-    public Expression convertStringToExpression(String expression) {
+    static public Expression convertStringToExpression(String expression) {
         return Parser.stringToExpression(expression);
     }
+
+    /**
+     * print string exception to console.
+     */
+    abstract public void print();
 }
 
 

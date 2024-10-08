@@ -26,6 +26,11 @@ public class Mul extends Expression {
     }
 
     @Override
+    public void print() {
+        System.out.println(this);
+    }
+
+    @Override
     public Expression derivative(String variable) {
         return new Add(
                 new Mul(left.derivative(variable), right),

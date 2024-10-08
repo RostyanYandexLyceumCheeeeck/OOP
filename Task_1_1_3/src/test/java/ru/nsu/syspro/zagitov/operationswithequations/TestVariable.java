@@ -9,20 +9,7 @@ import org.junit.jupiter.api.Test;
  * Class testing Variable.
  */
 public class TestVariable {
-    /**
-     * Class testing method protectedEval in Variable.
-     */
-    static class TestProtectedEvalVariable extends Variable {
-        /**
-         * Constructor.
-         *
-         * @param value is string name variable.
-         */
-        public TestProtectedEvalVariable(String value) {
-            super(value);
-        }
-    }
-
+    
     @Test
     void testToString() {
         String value = "zxc";
@@ -65,7 +52,7 @@ public class TestVariable {
     @Test
     void testProtectedEvalNotFound0() {
         String value = "zxc";
-        TestProtectedEvalVariable testVariable = new TestProtectedEvalVariable(value);
+        Variable testVariable = new Variable(value);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("x", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -82,7 +69,7 @@ public class TestVariable {
     @Test
     void testProtectedEvalNotFound1() {
         String value = "zxc";
-        TestProtectedEvalVariable testVariable = new TestProtectedEvalVariable(value);
+        Variable testVariable = new Variable(value);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zx", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -99,7 +86,7 @@ public class TestVariable {
     @Test
     void testProtectedEvalNotFound2() {
         String value = "zxc";
-        TestProtectedEvalVariable testVariable = new TestProtectedEvalVariable(value);
+        Variable testVariable = new Variable(value);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zXc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
@@ -116,7 +103,7 @@ public class TestVariable {
     @Test
     void testProtectedEvalExcept() {
         String value = "zxc";
-        TestProtectedEvalVariable testVariable = new TestProtectedEvalVariable(value);
+        Variable testVariable = new Variable(value);
         ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
         ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 

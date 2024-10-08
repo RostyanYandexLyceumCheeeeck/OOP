@@ -26,6 +26,11 @@ public class Add extends Expression {
     }
 
     @Override
+    public void print() {
+        System.out.println(this);
+    }
+
+    @Override
     public Expression derivative(String variable) {
         return new Add(left.derivative(variable), right.derivative(variable));
     }
