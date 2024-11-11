@@ -1,12 +1,19 @@
 package ru.nsu.syspro.zagitov.find;
 
-import org.junit.jupiter.api.Test;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import org.junit.jupiter.api.Test;
 
 
 /**
@@ -93,8 +100,7 @@ public class TestFindSubstring {
             createFile(filename, data);
             ArrayList<Long> res = clsFind.find(filename, substring);
             assert Objects.equals(res, List.of(3L, 14L));
-        }
-        finally {
+        } finally {
             deleteFile(filename);
         }
     }
@@ -157,8 +163,8 @@ public class TestFindSubstring {
                     writer.write(String.valueOf('0'));
                 }
                 writer.write(substring);
-                System.out.println(c);
             }
+            writer.close();
 
             ArrayList<Long> res = clsFind.find(filename, substring);
             assert Objects.equals(res, List.of(1L << 30, (2L << 30) + 5, (3L << 30) + 10));

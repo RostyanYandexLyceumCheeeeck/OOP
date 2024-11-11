@@ -79,7 +79,6 @@ public class FindSubstring {
         while ((ch = reader.read()) != -1) {
             if (surrogate != 0) {
                 ch = Character.toCodePoint(surrogate, (char) ch);
-//                surrogate = 0;
             } else if (Character.isHighSurrogate((char) ch)) {
                 surrogate = (char) ch;
                 continue;
