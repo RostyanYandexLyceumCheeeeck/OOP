@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.syspro.zagitov.find","l":"FindSubstring"},{"p":"ru.nsu.syspro.zagitov.find","l":"Main"}]
