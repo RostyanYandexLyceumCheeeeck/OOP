@@ -1,8 +1,8 @@
 package ru.nsu.syspro.zagitov.find;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -12,7 +12,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import org.junit.jupiter.api.Test;
 
 
@@ -43,7 +42,7 @@ public class TestFindSubstring {
     @Test
     public void testNextSymbol0() throws IOException {
         String filename = "testNextSymbol0.txt";
-        String data = "123うΩ\uD834\uDD1E456";
+        String data = "123うΩ𝄞456"; // "𝄞" == "\uD834\uDD1E"
 
         try {
             createFile(filename, data);
@@ -58,7 +57,7 @@ public class TestFindSubstring {
             assert ch4 == (int) 'う';
             clsFind.nextSymbol(reader);
             int ch6 = clsFind.nextSymbol(reader);
-            assert ch6 == 119070;
+            assert ch6 == 119070; // 119070 == (int) 𝄞
             int ch7 = clsFind.nextSymbol(reader);
             assert ch7 == (int) '4';
         } finally {
@@ -69,7 +68,7 @@ public class TestFindSubstring {
     @Test
     public void testNextSymbol1() throws IOException {
         String filename = "testNextSymbol1.txt";
-        String data = "123うΩ\uD834\uDD1E456";
+        String data = "123うΩ𝄞456";
 
         try {
             createFile(filename, data);
@@ -138,8 +137,8 @@ public class TestFindSubstring {
     @Test
     public void testFind3() throws IOException {
         String filename = "testFind3.txt";
-        String data = "123うΩ\uD834\uDD1E\uD834\uDD1E456";
-        String substring = "\uD834\uDD1E";
+        String data = "123うΩ𝄞𝄞456";
+        String substring = "𝄞";
 
         try {
             createFile(filename, data);

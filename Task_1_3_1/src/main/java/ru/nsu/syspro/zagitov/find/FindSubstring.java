@@ -27,20 +27,20 @@ public class FindSubstring {
 
         int[] sample = pattern.codePoints().toArray();
         int[] prefix = new int[sample.length];
-        int last_prefix = 0;
+        int lastPrefix = 0;
         prefix[0] = 0;
 
         for (int i = 1; i < sample.length; i++) {
-            while (last_prefix > 0 && sample[last_prefix] != sample[i]) {
-                last_prefix = prefix[last_prefix - 1];
+            while (lastPrefix > 0 && sample[lastPrefix] != sample[i]) {
+                lastPrefix = prefix[lastPrefix - 1];
             }
-            if (sample[last_prefix] == sample[i]) {
-                last_prefix++;
+            if (sample[lastPrefix] == sample[i]) {
+                lastPrefix++;
             }
-            prefix[i] = last_prefix;
+            prefix[i] = lastPrefix;
         }
 
-        last_prefix = 0;
+        lastPrefix = 0;
         ArrayList<Long> result = new ArrayList<>();
         try (Reader reader = new InputStreamReader(new FileInputStream(filename),
                 StandardCharsets.UTF_8)) {
@@ -50,16 +50,16 @@ public class FindSubstring {
             while ((ch = nextSymbol(reader)) != -1) {
                 index++;
 
-                while (last_prefix > 0 && sample[last_prefix] != ch) {
-                    last_prefix = prefix[last_prefix - 1];
+                while (lastPrefix > 0 && sample[lastPrefix] != ch) {
+                    lastPrefix = prefix[lastPrefix - 1];
                 }
 
-                if (sample[last_prefix] == ch) {
-                    last_prefix++;
+                if (sample[lastPrefix] == ch) {
+                    lastPrefix++;
                 }
-                if (last_prefix == sample.length) {
-                    result.add(index - last_prefix);
-                    last_prefix = prefix[last_prefix - 1];
+                if (lastPrefix == sample.length) {
+                    result.add(index - lastPrefix);
+                    lastPrefix = prefix[lastPrefix - 1];
                 }
             }
         }
@@ -85,6 +85,6 @@ public class FindSubstring {
             }
             return ch;
         }
-    return -1;
+        return -1;
     }
 }
