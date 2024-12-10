@@ -105,13 +105,29 @@ public class TestHashTable {
     }
 
     @Test
-    public void testIteratorConcurrentModificationException() {
+    public void testIteratorConcurrentModificationException0() {
         HashTable<String, Number> hashTable = new HashTable<>();
         hashTable.put("A", 1);
         hashTable.put("B", 2);
 
         Iterator<Entry<String, Number>> iterator = hashTable.iterator();
         hashTable.remove("A");
+        Assertions.assertThrows(ConcurrentModificationException.class, iterator::next);
+    }
+
+    @Test
+    public void testIteratorConcurrentModificationException1() {
+        HashTable<String, Number> hashTable = new HashTable<>();
+        hashTable.put("A", 1);
+        hashTable.put("B", 2);
+        hashTable.put("C", 3);
+
+        Iterator<Entry<String, Number>> iterator = hashTable.iterator();
+        hashTable.put("A", 1);
+        iterator.next();
+        hashTable.put("B", 2);
+        iterator.next();
+        hashTable.put("C", 1);
         Assertions.assertThrows(ConcurrentModificationException.class, iterator::next);
     }
 

@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="77ec4cf5-b99f-4a62-8c09-33f1ef846b08" name="Changes" comment="" />
+    <list default="true" id="77ec4cf5-b99f-4a62-8c09-33f1ef846b08" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/syspro/zagitov/hashtable/HashTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/syspro/zagitov/hashtable/HashTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/syspro/zagitov/hashtable/TestHashTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/nsu/syspro/zagitov/hashtable/TestHashTable.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -65,9 +70,11 @@
     "Gradle.Task_1_2_2 [:ru.nsu.syspro.zagitov.hashtable.HashTable.main()].executor": "Run",
     "Gradle.Task_1_2_2 [:ru.nsu.syspro.zagitov.hashtable.Main.main()].executor": "Run",
     "Gradle.TestHashTable.executor": "Run",
+    "Gradle.TestHashTable.testEquals.executor": "Run",
     "Gradle.TestHashTable.testIterator.executor": "Run",
+    "Gradle.TestHashTable.testIteratorConcurrentModificationException1.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "task-1-2-2",
+    "git-widget-placeholder": "#6 on task-1-2-2",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/rostyan/IdeaProjects/OOP/Task_1_2_2",
     "node.js.detected.package.eslint": "true",
@@ -79,34 +86,8 @@
   }
 }]]></component>
   <component name="RunManager" selected="Gradle.TestHashTable">
-    <configuration name="HASHTable" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.nsu.syspro.zagitov.hashtable.HASHTable" />
-      <module name="Task_1_2_2.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ru.nsu.syspro.zagitov.hashtable.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="HashTable" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.nsu.syspro.zagitov.hashtable.HashTable" />
-      <module name="Task_1_2_2.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ru.nsu.syspro.zagitov.hashtable.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.nsu.syspro.zagitov.hashtable.Main" />
       <module name="Task_1_2_2.main" />
       <extension name="coverage">
         <pattern>
@@ -142,6 +123,30 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="TestHashTable.testEquals" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ru.nsu.syspro.zagitov.hashtable.TestHashTable.testEquals&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="TestHashTable.testIterator" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -166,13 +171,37 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="TestHashTable.testIteratorConcurrentModificationException1" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ru.nsu.syspro.zagitov.hashtable.TestHashTable.testIteratorConcurrentModificationException1&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.TestHashTable" />
+        <item itemvalue="Gradle.TestHashTable.testIteratorConcurrentModificationException1" />
+        <item itemvalue="Gradle.TestHashTable.testEquals" />
         <item itemvalue="Gradle.TestHashTable.testIterator" />
-        <item itemvalue="Application.HASHTable" />
         <item itemvalue="Application.HashTable" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -197,6 +226,7 @@
       <workItem from="1733766453436" duration="7956000" />
       <workItem from="1733774735362" duration="4541000" />
       <workItem from="1733820278536" duration="3119000" />
+      <workItem from="1733848709241" duration="2328000" />
     </task>
     <servers />
   </component>

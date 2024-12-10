@@ -16,6 +16,7 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>>  {
     private static final int INITIAL_CAPACITY = 16;
     private static final float LOAD_FACTOR = 0.75f;
     private LinkedList<Entry<K, V>>[] table;
+    private int countOperations = 0;
     private int size = 0;
 
     /**
@@ -86,12 +87,14 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>>  {
 
         for (Entry<K, V> entry : table[index]) {
             if (entry.key.equals(key)) {
+                countOperations += (entry.value.equals(value) && entry.value == value) ? 0 : 1;
                 entry.value = value;
                 return;
             }
         }
         table[index].add(new Entry<>(key, value));
         size++;
+        countOperations++;
 
         if (size > table.length * LOAD_FACTOR) {
             resize();
@@ -99,7 +102,7 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>>  {
     }
 
     /**
-     *
+     * Returns value for a key if found key else {@code null}.
      *
      * @param key the key.
      * @return {@code null} if not found else value by key.
@@ -136,6 +139,7 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>>  {
                 if (table[index].isEmpty()) {
                     table[index] = null;
                 }
+                countOperations++;
                 size--;
                 return;
             }
@@ -163,6 +167,7 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>>  {
     private void resize() {
         LinkedList<Entry<K, V>>[] oldTable = table;
         table = new LinkedList[oldTable.length * 2];
+        int saveCountOperations = countOperations;
         size = 0;
 
         for (LinkedList<Entry<K, V>> bucket : oldTable) {
@@ -172,6 +177,7 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>>  {
                 }
             }
         }
+        countOperations = saveCountOperations;
     }
 
     @Override
@@ -187,7 +193,7 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>>  {
             return false;
         }
         for (Entry<K, V> entry : this) {
-            if (other.get(entry.key) != entry.value) {
+            if (!other.get(entry.key).equals(entry.value)) {
                 return false;
             }
         }
@@ -227,13 +233,13 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>>  {
      * Constructs an iterator over the hashtable.
      */
     private class IteratorHashTable implements Iterator<Entry<K, V>> {
-        private final int frozenSize = size;
+        private final int frozenCountOperations = countOperations;
         private int targetIndex = 0;
         private int iterIndex = 0;
 
         @Override
         public boolean hasNext() {
-            if (frozenSize != size) {
+            if (frozenCountOperations != countOperations) {
                 throw new ConcurrentModificationException();
             }
             while (iterIndex < table.length &&
@@ -245,7 +251,7 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>>  {
 
         @Override
         public Entry<K, V> next() {
-            if (frozenSize != size) {
+            if (frozenCountOperations != countOperations) {
                 throw new ConcurrentModificationException();
             }
             if (!hasNext()) {
