@@ -24,11 +24,6 @@ public class Variable extends Expression {
     }
 
     @Override
-    public void print() {
-        System.out.println(this);
-    }
-
-    @Override
     public Expression derivative(String variable) {
         return new Number(Objects.equals(variable, value) ? 1 : 0);
     }
@@ -41,5 +36,10 @@ public class Variable extends Expression {
             }
         }
         throw new ArithmeticException("Arithmetic Error! \"" + value + "\" not found!");
+    }
+
+    @Override
+    public Expression simplify() {
+        return new Variable(value);
     }
 }

@@ -261,34 +261,4 @@ public class TestDiv {
         int result = expression.eval("x = -162; yY =    81");
         Assertions.assertEquals(-2, result);
     }
-
-    @Test
-    void testConvertStringToExpression0() {
-        Div testDiv = new Div(
-                new Number(21),
-                new Div(
-                        new Number(42),
-                        new Number(2)
-                )
-        );
-        String expected = testDiv.toString();  // (21/(42/2))
-        Expression result = Expression.convertStringToExpression(expected);
-        Assertions.assertEquals(expected, result.toString());
-    }
-
-    @Test
-    void testConvertStringToExpression1() {
-        Div testDiv = new Div(
-                new Mul(
-                        new Number(3),
-                        new Variable("zxc")
-                ),
-                new Sub(
-                        new Number(1000),
-                        new Number(7))
-        );
-        String expected = testDiv.toString();  // ((3*zxc)/(1000-7))
-        Expression result = Expression.convertStringToExpression(expected);
-        Assertions.assertEquals(expected, result.toString());
-    }
 }

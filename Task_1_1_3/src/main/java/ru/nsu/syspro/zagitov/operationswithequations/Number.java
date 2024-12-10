@@ -23,11 +23,6 @@ public class Number extends Expression {
     }
 
     @Override
-    public void print() {
-        System.out.println(this);
-    }
-
-    @Override
     public Expression derivative(String variable) {
         return new Number(0);
     }
@@ -35,5 +30,10 @@ public class Number extends Expression {
     @Override
     protected int protectedEval(ArrayList<String> names, ArrayList<Integer> values) {
         return number;
+    }
+
+    @Override
+    public Expression simplify() {
+        return new Number(number);
     }
 }

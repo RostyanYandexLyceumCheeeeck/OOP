@@ -8,6 +8,12 @@ import java.util.regex.Pattern;
  * Base class expression.
  */
 public abstract class Expression {
+    /**
+     * Symbolic differentiation of expressions by a given variable.
+     *
+     * @param variable differentiable variable.
+     * @return new Expression is the result of differentiation.
+     */
     public abstract Expression derivative(String variable);
 
     /**
@@ -59,7 +65,16 @@ public abstract class Expression {
     /**
      * print string exception to console.
      */
-    abstract public void print();
+    public void print() {
+        System.out.println(this);
+    }
+
+    /**
+     * A function to simplify expressions.
+     *
+     * @return new Expression is the result of simplification.
+     */
+    abstract public Expression simplify();
 }
 
 

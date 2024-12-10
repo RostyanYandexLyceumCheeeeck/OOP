@@ -26,11 +26,6 @@ public class Add extends Expression {
     }
 
     @Override
-    public void print() {
-        System.out.println(this);
-    }
-
-    @Override
     public Expression derivative(String variable) {
         return new Add(left.derivative(variable), right.derivative(variable));
     }
@@ -38,5 +33,20 @@ public class Add extends Expression {
     @Override
     protected int protectedEval(ArrayList<String> names, ArrayList<Integer> values) {
         return left.protectedEval(names, values) + right.protectedEval(names, values);
+    }
+
+    @Override
+    public Expression simplify() {
+        Add result = new Add(left.simplify(), right.simplify());
+        if (result.left.getClass() == Number.class && result.right.getClass() == Number.class) {
+            return new Number(result.left.eval("x = 0") + result.right.eval("x = 0"));
+        }
+        if (result.left.getClass() == Number.class && result.left.eval("x = 0") == 0) {
+            return result.right;
+        }
+        if (result.right.getClass() == Number.class && result.right.eval("x = 0") == 0) {
+            return result.left;
+        }
+        return result;
     }
 }

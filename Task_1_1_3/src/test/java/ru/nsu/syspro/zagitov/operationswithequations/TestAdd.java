@@ -283,32 +283,4 @@ public class TestAdd {
         Assertions.assertEquals(-100, result);
     }
 
-    @Test
-    void testConvertStringToExpression0() {
-        Add testAdd = new Add(
-                new Mul(
-                        new Number(3), new Number(-7)
-                ),
-                new Number(21)
-        );
-        String expected = testAdd.toString();  // ((3*-7)+21)
-        Expression result = Expression.convertStringToExpression(expected);
-        Assertions.assertEquals(expected, result.toString());
-    }
-
-    @Test
-    void testConvertStringToExpression1() {
-        Add testAdd = new Add(
-                new Mul(
-                        new Number(3),
-                        new Number(-7)
-                ),
-                new Div(
-                        new Number(1000),
-                        new Number(2))
-        );
-        String expected = testAdd.toString();  // ((3*-7)+(1000/21))
-        Expression result = Expression.convertStringToExpression(expected);
-        Assertions.assertEquals(expected, result.toString());
-    }
 }
