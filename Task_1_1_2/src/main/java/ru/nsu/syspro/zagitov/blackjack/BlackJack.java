@@ -174,8 +174,7 @@ public class BlackJack {
      * @param console where the user enters the data.
      * @param number round number.
      * @return -1 if win Dealer else (1 if You win else 0).
-     * @throws Exception if you have entered {@code exitGame} or
-     * not {@code messagePlayer1}.
+     * @throws Exception if you have entered {@code exitGame} or not {@code messagePlayer1}.
      */
     private int round(Scanner console, int number) throws Exception {
         int draw = 0;

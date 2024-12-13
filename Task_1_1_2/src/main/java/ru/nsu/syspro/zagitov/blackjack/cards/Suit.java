@@ -1,27 +1,41 @@
 package ru.nsu.syspro.zagitov.blackjack.cards;
 
+/**
+ * Suit card.
+ */
 public enum Suit {
-    CLUBS(0, "Треф"),
-    DIAMONDS(1, "Бубен"),
-    HEARTS(2, "Черви"),
-    SPADES(3, "Пики");
+    CLUBS("Треф"),
+    DIAMONDS("Бубен"),
+    HEARTS("Черви"),
+    SPADES("Пики");
 
-    final int points;
     final String name;
 
-    Suit(int points, String name) {
-        this.points = points;
+    /**
+     * default constructor.
+     *
+     * @param name name suit card.
+     */
+    Suit(String name) {
         this.name = name;
     }
 
-    public int getPoints() {
-        return points;
-    }
-
+    /**
+     * Getter name suit card.
+     *
+     * @return name suit.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Getter suit by name card.
+     *
+     * @param name name suit card.
+     * @return {@code Suit} suit card.
+     * @throws IllegalArgumentException if name suit not found.
+     */
     public static Suit findByName(String name) throws IllegalArgumentException {
         for (Suit suit : Suit.values()) {
             if (suit.getName().equals(name)) {
@@ -30,5 +44,4 @@ public enum Suit {
         }
         throw new IllegalArgumentException();
     }
-
 }
