@@ -68,7 +68,7 @@ public abstract class Expression {
     }
 
     /**
-     * print string exception to console.
+     * print string expression to console.
      */
     public void print() {
         System.out.println(this);

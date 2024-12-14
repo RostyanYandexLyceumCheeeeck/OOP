@@ -11,10 +11,10 @@ public class Main {
      */
     public static void main(String[] args) {
         Expression e = new Add(new Number(3), new Mul(new Number(2), new Variable("x")));
-        System.out.println(e); // (3+(2*x))
+        e.print(); // (3+(2*x))
 
         Expression de = e.derivative("x");
-        System.out.println(de);
+        de.print();
         int result = e.eval("x = 10; y = 13");
         int result1 = e.eval("x = 0; y = 13");
         int result2 = e.eval("x = -0; y = 13");
