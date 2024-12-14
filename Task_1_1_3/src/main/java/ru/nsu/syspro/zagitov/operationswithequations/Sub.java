@@ -1,6 +1,6 @@
 package ru.nsu.syspro.zagitov.operationswithequations;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Class is difference.
@@ -31,22 +31,35 @@ public class Sub extends Expression {
     }
 
     @Override
-    protected int protectedEval(ArrayList<String> names, ArrayList<Integer> values) {
-        return left.protectedEval(names, values) - right.protectedEval(names, values);
+    protected int protectedEval(Map<String, Integer> namesValues) {
+        return left.protectedEval(namesValues) - right.protectedEval(namesValues);
     }
 
     @Override
     public Expression simplify() {
         Sub result = new Sub(left.simplify(), right.simplify());
-        if (result.left.getClass() == Number.class && result.right.getClass() == Number.class) {
-            return new Number(result.left.eval("x = 0") - result.right.eval("x = 0"));
+        if (result.left instanceof Number && result.right instanceof Number) {
+            return new Number(
+                    ((Number) result.left).number - ((Number) result.right).number
+            );
         }
-        if (result.right.getClass() == Number.class && result.right.eval("x = 0") == 0) {
+        if (result.right instanceof Number && ((Number) result.right).number == 0) {
             return result.left;
         }
-        if (result.left.toString().equals(result.right.toString())) {
+        if (result.left.equals(result.right)) {
             return new Number(0);
         }
         return result;
+    }
+
+    @Override
+    public boolean equals(Expression other) {
+        if (this == other) {
+            return true;
+        }
+        if (other instanceof Sub otherSub) {
+            return left.equals(otherSub.left) && right.equals(otherSub.right);
+        }
+        return false;
     }
 }

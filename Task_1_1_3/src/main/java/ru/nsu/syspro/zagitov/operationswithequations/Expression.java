@@ -1,6 +1,7 @@
 package ru.nsu.syspro.zagitov.operationswithequations;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,6 +9,11 @@ import java.util.regex.Pattern;
  * Base class expression.
  */
 public abstract class Expression {
+    private static final Pattern patternEval = Pattern.compile(
+            "(" + Parser.patternVariable.pattern() + ")\\s*=\\s*("
+                    + Parser.patternNumber.pattern() + ")"
+    );
+
     /**
      * Symbolic differentiation of expressions by a given variable.
      *
@@ -24,33 +30,32 @@ public abstract class Expression {
      */
     public int eval(String variables) {
         String[] tokens = variables.split(";");
-        Pattern pattern = Pattern.compile(
-                "(" + Parser.patternVariable.pattern() + ")\\s*=\\s*("
-                        + Parser.patternNumber.pattern() + ")"
-        );
-        ArrayList<String> names = new ArrayList<>();
-        ArrayList<Integer> values = new ArrayList<>();
+        Map<String, Integer> namesValues = new HashMap<>();
 
         for (String token : tokens) {
-            Matcher matcher = pattern.matcher(token);
+            if (token == null || token.isEmpty()) {
+                continue;
+            }
+            Matcher matcher = patternEval.matcher(token);
             if (!matcher.find()) {
                 throw new IllegalArgumentException("Invalid expression: " + token
                         + "! Example: x = 10");
             }
-            names.add(matcher.group(1));
-            values.add(Integer.valueOf(matcher.group(2)));
+            namesValues.put(matcher.group(1), Integer.valueOf(matcher.group(2)));
         }
-        return protectedEval(names, values);
+        return protectedEval(namesValues);
+    }
+
+    public int eval() {
+        return protectedEval(new HashMap<>());
     }
 
     /**
      * Recursive eval.
      *
-     * @param names  is strings names variables.
-     * @param values is integers value variables.
      * @return calculating expressions.
      */
-    protected abstract int protectedEval(ArrayList<String> names, ArrayList<Integer> values);
+    protected abstract int protectedEval(Map<String, Integer> namesValues);
 
     /**
      * Convert string expression to instance Expression.
@@ -75,6 +80,6 @@ public abstract class Expression {
      * @return new Expression is the result of simplification.
      */
     abstract public Expression simplify();
+
+    abstract public boolean equals(Expression other);
 }
-
-

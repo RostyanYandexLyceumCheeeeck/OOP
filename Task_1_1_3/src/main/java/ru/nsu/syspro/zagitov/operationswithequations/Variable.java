@@ -1,45 +1,54 @@
 package ru.nsu.syspro.zagitov.operationswithequations;
 
-import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 
 /**
  * Class is variable.
  */
 public class Variable extends Expression {
-    String value;
+    String name;
 
     /**
      * Constructor classes Variable.
      *
-     * @param value String name variable.
+     * @param name String name variable.
      */
-    public Variable(String value) {
-        this.value = value;
+    public Variable(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return value;
+        return name;
     }
 
     @Override
     public Expression derivative(String variable) {
-        return new Number(Objects.equals(variable, value) ? 1 : 0);
+        return new Number(Objects.equals(variable, name) ? 1 : 0);
     }
 
     @Override
-    protected int protectedEval(ArrayList<String> names, ArrayList<Integer> values) {
-        for (int i = 0; i < names.size(); i++) {
-            if (Objects.equals(names.get(i), value)) {
-                return values.get(i);
-            }
+    protected int protectedEval(Map<String, Integer> namesValues) {
+        if (!namesValues.containsKey(name)) {
+            throw new IllegalArgumentException("Variable \"" + name + "\" not found!");
         }
-        throw new ArithmeticException("Arithmetic Error! \"" + value + "\" not found!");
+        return namesValues.get(name);
     }
 
     @Override
     public Expression simplify() {
-        return new Variable(value);
+        return new Variable(name);
+    }
+
+    @Override
+    public boolean equals(Expression other) {
+        if (this == other) {
+            return true;
+        }
+        if (other instanceof Variable otherVariable) {
+            return Objects.equals(name, otherVariable.name);
+        }
+        return false;
     }
 }

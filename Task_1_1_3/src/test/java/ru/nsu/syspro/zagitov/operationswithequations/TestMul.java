@@ -1,7 +1,8 @@
 package ru.nsu.syspro.zagitov.operationswithequations;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -32,56 +33,136 @@ public class TestMul {
     void testDerivativeNumberAndNumber() {
         Mul mul = new Mul(new Number(10), new Number(20));
         Expression newMul = mul.derivative("");
-        Assertions.assertEquals("((0*20)+(10*0))", newMul.toString());
+        Expression expected = new Add(
+                new Mul(
+                        new Number(0),
+                        new Number(20)
+                ),
+                new Mul(
+                        new Number(10),
+                        new Number(0)
+                )
+        );
+        Assertions.assertTrue(expected.equals(newMul));
     }
 
     @Test
     void testDerivativeNumberAndVariable0() {
         Mul mul = new Mul(new Number(10), new Variable("zxc"));
         Expression newMul = mul.derivative("");
-        Assertions.assertEquals("((0*zxc)+(10*0))", newMul.toString());
+        Expression expected = new Add(
+                new Mul(
+                        new Number(0),
+                        new Variable("zxc")
+                ),
+                new Mul(
+                        new Number(10),
+                        new Number(0)
+                )
+        );
+        Assertions.assertTrue(expected.equals(newMul));
     }
 
     @Test
     void testDerivativeNumberAndVariable1() {
         Mul mul = new Mul(new Number(10), new Variable("zxc"));
         Expression newMul = mul.derivative("z");
-        Assertions.assertEquals("((0*zxc)+(10*0))", newMul.toString());
+        Expression expected = new Add(
+                new Mul(
+                        new Number(0),
+                        new Variable("zxc")
+                ),
+                new Mul(
+                        new Number(10),
+                        new Number(0)
+                )
+        );
+        Assertions.assertTrue(expected.equals(newMul));
     }
 
     @Test
     void testDerivativeNumberAndVariable2() {
         Mul mul = new Mul(new Number(10), new Variable("zxc"));
         Expression newMul = mul.derivative("zx");
-        Assertions.assertEquals("((0*zxc)+(10*0))", newMul.toString());
+        Expression expected = new Add(
+                new Mul(
+                        new Number(0),
+                        new Variable("zxc")
+                ),
+                new Mul(
+                        new Number(10),
+                        new Number(0)
+                )
+        );
+        Assertions.assertTrue(expected.equals(newMul));
     }
 
     @Test
     void testDerivativeNumberAndVariable3() {
         Mul mul = new Mul(new Number(10), new Variable("zxc"));
         Expression newMul = mul.derivative("zXc");
-        Assertions.assertEquals("((0*zxc)+(10*0))", newMul.toString());
+        Expression expected = new Add(
+                new Mul(
+                        new Number(0),
+                        new Variable("zxc")
+                ),
+                new Mul(
+                        new Number(10),
+                        new Number(0)
+                )
+        );
+        Assertions.assertTrue(expected.equals(newMul));
     }
 
     @Test
     void testDerivativeNumberAndVariable4() {
         Mul mul = new Mul(new Number(10), new Variable("zxc"));
         Expression newMul = mul.derivative("zxc");
-        Assertions.assertEquals("((0*zxc)+(10*1))", newMul.toString());
+        Expression expected = new Add(
+                new Mul(
+                        new Number(0),
+                        new Variable("zxc")
+                ),
+                new Mul(
+                        new Number(10),
+                        new Number(1)
+                )
+        );
+        Assertions.assertTrue(expected.equals(newMul));
     }
 
     @Test
     void testDerivativeVariableAndVariable() {
         Mul mul = new Mul(new Variable("x"), new Variable("zxc"));
         Expression newMul = mul.derivative("z");
-        Assertions.assertEquals("((0*zxc)+(x*0))", newMul.toString());
+        Expression expected = new Add(
+                new Mul(
+                        new Number(0),
+                        new Variable("zxc")
+                ),
+                new Mul(
+                        new Variable("x"),
+                        new Number(0)
+                )
+        );
+        Assertions.assertTrue(expected.equals(newMul));
     }
 
     @Test
     void testDerivativeVariableAndVariableLeft() {
         Mul mul = new Mul(new Variable("x"), new Variable("zxc"));
         Expression newMul = mul.derivative("x");
-        Assertions.assertEquals("((1*zxc)+(x*0))", newMul.toString());
+        Expression expected = new Add(
+                new Mul(
+                        new Number(1),
+                        new Variable("zxc")
+                ),
+                new Mul(
+                        new Variable("x"),
+                        new Number(0)
+                )
+        );
+        Assertions.assertTrue(expected.equals(newMul));
     }
 
     @Test
@@ -89,7 +170,17 @@ public class TestMul {
         Mul mul = new Mul(new Variable("x"), new Variable("zxc"));
 
         Expression newMul = mul.derivative("zxc");
-        Assertions.assertEquals("((0*zxc)+(x*1))", newMul.toString());
+        Expression expected = new Add(
+                new Mul(
+                        new Number(0),
+                        new Variable("zxc")
+                ),
+                new Mul(
+                        new Variable("x"),
+                        new Number(1)
+                )
+        );
+        Assertions.assertTrue(expected.equals(newMul));
     }
 
     @Test
@@ -97,10 +188,12 @@ public class TestMul {
         Number left = new Number(10);
         Number right = new Number(20);
         Mul testMul = new Mul(left, right);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("zXc", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
-        int mulEval = testMul.protectedEval(names, values);
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put("zXc", 10);
+        namesValues.put("y", 13);
+
+        int mulEval = testMul.protectedEval(namesValues);
         Assertions.assertEquals(200, mulEval);
     }
 
@@ -111,15 +204,18 @@ public class TestMul {
         Variable right = new Variable(value);
 
         Mul testMul = new Mul(left, right);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("zXc", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put("zXc", 10);
+        namesValues.put("y", 13);
 
-        ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int mulEval = testMul.protectedEval(names, values);
-            Assertions.assertEquals(10, mulEval);
-        });
+        IllegalArgumentException exception = Assertions.assertThrows(
+                IllegalArgumentException.class, () -> {
+                    int mulEval = testMul.protectedEval(namesValues);
+                    Assertions.assertEquals(10, mulEval);
+                }
+        );
 
-        String expectedMessage = "Arithmetic Error! \"" + value + "\" not found!";
+        String expectedMessage = "Variable \"" + value + "\" not found!";
         String actualMessage = exception.getMessage();
         Assertions.assertEquals(expectedMessage, actualMessage);
     }
@@ -131,10 +227,11 @@ public class TestMul {
         Variable right = new Variable(value);
 
         Mul testMul = new Mul(left, right);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put(value, 10);
+        namesValues.put("y", 13);
 
-        Assertions.assertEquals(100, testMul.protectedEval(names, values));
+        Assertions.assertEquals(100, testMul.protectedEval(namesValues));
     }
 
     @Test
@@ -145,15 +242,18 @@ public class TestMul {
         Variable right = new Variable(valueRight);
 
         Mul testMul = new Mul(left, right);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("x", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put("x", 10);
+        namesValues.put("y", 13);
 
-        ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int mulEval = testMul.protectedEval(names, values);
-            Assertions.assertEquals(10, mulEval);
-        });
+        IllegalArgumentException exception = Assertions.assertThrows(
+                IllegalArgumentException.class, () -> {
+                    int mulEval = testMul.protectedEval(namesValues);
+                    Assertions.assertEquals(10, mulEval);
+                }
+        );
 
-        String expectedMessage = "Arithmetic Error! \"" + valueLeft + "\" not found!";
+        String expectedMessage = "Variable \"" + valueLeft + "\" not found!";
         String actualMessage = exception.getMessage();
         Assertions.assertEquals(expectedMessage, actualMessage);
     }
@@ -167,15 +267,18 @@ public class TestMul {
         Variable right = new Variable(valueRight);
 
         Mul testMul = new Mul(left, right);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put(valueLeft, 10);
+        namesValues.put("y", 13);
 
-        ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int mulEval = testMul.protectedEval(names, values);
-            Assertions.assertEquals(10, mulEval);
-        });
+        IllegalArgumentException exception = Assertions.assertThrows(
+                IllegalArgumentException.class, () -> {
+                    int mulEval = testMul.protectedEval(namesValues);
+                    Assertions.assertEquals(10, mulEval);
+                }
+        );
 
-        String expectedMessage = "Arithmetic Error! \"" + valueRight + "\" not found!";
+        String expectedMessage = "Variable \"" + valueRight + "\" not found!";
         String actualMessage = exception.getMessage();
         Assertions.assertEquals(expectedMessage, actualMessage);
     }
@@ -187,15 +290,18 @@ public class TestMul {
         Variable right = new Variable(value);
 
         Mul testMul = new Mul(left, right);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put("asd", 10);
+        namesValues.put("y", 13);
 
-        ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int mulEval = testMul.protectedEval(names, values);
-            Assertions.assertEquals(10, mulEval);
-        });
+        IllegalArgumentException exception = Assertions.assertThrows(
+                IllegalArgumentException.class, () -> {
+                    int mulEval = testMul.protectedEval(namesValues);
+                    Assertions.assertEquals(10, mulEval);
+                }
+        );
 
-        String expectedMessage = "Arithmetic Error! \"" + value + "\" not found!";
+        String expectedMessage = "Variable \"" + value + "\" not found!";
         String actualMessage = exception.getMessage();
         Assertions.assertEquals(expectedMessage, actualMessage);
     }
@@ -208,10 +314,11 @@ public class TestMul {
         Variable right = new Variable(valueRight);
 
         Mul testMul = new Mul(left, right);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "zxc"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put(valueLeft, 10);
+        namesValues.put(valueRight, 13);
 
-        Assertions.assertEquals(130, testMul.protectedEval(names, values));
+        Assertions.assertEquals(130, testMul.protectedEval(namesValues));
     }
 
     @Test
@@ -221,10 +328,10 @@ public class TestMul {
         Variable right = new Variable(value);
 
         Mul testMul = new Mul(left, right);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put(value, 10);
 
-        Assertions.assertEquals(100, testMul.protectedEval(names, values));
+        Assertions.assertEquals(100, testMul.protectedEval(namesValues));
     }
 
     @Test

@@ -1,7 +1,8 @@
 package ru.nsu.syspro.zagitov.operationswithequations;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +23,7 @@ public class TestNumber {
         int value = 17;
         Number number = new Number(value);
         Expression numberDerivative = number.derivative("");
-        Assertions.assertEquals("0", numberDerivative.toString());
+        Assertions.assertEquals(0, numberDerivative.eval());
     }
 
     @Test
@@ -33,16 +34,18 @@ public class TestNumber {
                 super(number);
             }
 
-            public int getProtectedEval(ArrayList<String> names, ArrayList<Integer> values) {
-                return protectedEval(names, values);
+            public int getProtectedEval(Map<String, Integer> namesValues) {
+                return protectedEval(namesValues);
             }
         }
 
         int value = 17;
         TestProtectedEvalNumber testNumber = new TestProtectedEvalNumber(value);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("x", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
-        Assertions.assertEquals(value, testNumber.getProtectedEval(names, values));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put("x", 10);
+        namesValues.put("y", 13);
+
+        Assertions.assertEquals(value, testNumber.getProtectedEval(namesValues));
     }
 }

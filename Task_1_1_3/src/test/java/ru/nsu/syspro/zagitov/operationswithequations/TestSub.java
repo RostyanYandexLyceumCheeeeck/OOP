@@ -1,7 +1,8 @@
 package ru.nsu.syspro.zagitov.operationswithequations;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -32,64 +33,99 @@ public class TestSub {
     void testDerivativeNumberAndNumber() {
         Sub sub = new Sub(new Number(10), new Number(20));
         Expression newSub = sub.derivative("");
-        Assertions.assertEquals("(0-0)", newSub.toString());
+        Expression expected = new Sub(
+                new Number(0),
+                new Number(0)
+        );
+        Assertions.assertTrue(expected.equals(newSub));
     }
 
     @Test
     void testDerivativeNumberAndVariable0() {
         Sub sub = new Sub(new Number(10), new Variable("zxc"));
         Expression newSub = sub.derivative("");
-        Assertions.assertEquals("(0-0)", newSub.toString());
+        Expression expected = new Sub(
+                new Number(0),
+                new Number(0)
+        );
+        Assertions.assertTrue(expected.equals(newSub));
     }
 
     @Test
     void testDerivativeNumberAndVariable1() {
         Sub sub = new Sub(new Number(10), new Variable("zxc"));
         Expression newSub = sub.derivative("z");
-        Assertions.assertEquals("(0-0)", newSub.toString());
+        Expression expected = new Sub(
+                new Number(0),
+                new Number(0)
+        );
+        Assertions.assertTrue(expected.equals(newSub));
     }
 
     @Test
     void testDerivativeNumberAndVariable2() {
         Sub sub = new Sub(new Number(10), new Variable("zxc"));
         Expression newSub = sub.derivative("zx");
-        Assertions.assertEquals("(0-0)", newSub.toString());
+        Expression expected = new Sub(
+                new Number(0),
+                new Number(0)
+        );
+        Assertions.assertTrue(expected.equals(newSub));
     }
 
     @Test
     void testDerivativeNumberAndVariable3() {
         Sub sub = new Sub(new Number(10), new Variable("zxc"));
         Expression newSub = sub.derivative("zXc");
-        Assertions.assertEquals("(0-0)", newSub.toString());
+        Expression expected = new Sub(
+                new Number(0),
+                new Number(0)
+        );
+        Assertions.assertTrue(expected.equals(newSub));
     }
 
     @Test
     void testDerivativeNumberAndVariable4() {
         Sub sub = new Sub(new Number(10), new Variable("zxc"));
         Expression newSub = sub.derivative("zxc");
-        Assertions.assertEquals("(0-1)", newSub.toString());
+        Expression expected = new Sub(
+                new Number(0),
+                new Number(1)
+        );
+        Assertions.assertTrue(expected.equals(newSub));
     }
 
     @Test
     void testDerivativeVariableAndVariable() {
         Sub sub = new Sub(new Variable("x"), new Variable("zxc"));
         Expression newSub = sub.derivative("z");
-        Assertions.assertEquals("(0-0)", newSub.toString());
+        Expression expected = new Sub(
+                new Number(0),
+                new Number(0)
+        );
+        Assertions.assertTrue(expected.equals(newSub));
     }
 
     @Test
     void testDerivativeVariableAndVariableLeft() {
         Sub sub = new Sub(new Variable("x"), new Variable("zxc"));
         Expression newSub = sub.derivative("x");
-        Assertions.assertEquals("(1-0)", newSub.toString());
+        Expression expected = new Sub(
+                new Number(1),
+                new Number(0)
+        );
+        Assertions.assertTrue(expected.equals(newSub));
     }
 
     @Test
     void testDerivativeVariableAndVariableRight() {
         Sub sub = new Sub(new Variable("x"), new Variable("zxc"));
-
         Expression newSub = sub.derivative("zxc");
-        Assertions.assertEquals("(0-1)", newSub.toString());
+        Expression expected = new Sub(
+                new Number(0),
+                new Number(1)
+        );
+        Assertions.assertTrue(expected.equals(newSub));
     }
 
     @Test
@@ -97,10 +133,11 @@ public class TestSub {
         Number left = new Number(10);
         Number right = new Number(20);
         Sub testSub = new Sub(left, right);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("zXc", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put("zXc", 10);
+        namesValues.put("y", 13);
 
-        int subEval = testSub.protectedEval(names, values);
+        int subEval = testSub.protectedEval(namesValues);
         Assertions.assertEquals(-10, subEval);
     }
 
@@ -111,15 +148,18 @@ public class TestSub {
         Variable right = new Variable(value);
 
         Sub testSub = new Sub(left, right);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("zXc", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put("zXc", 10);
+        namesValues.put("y", 13);
 
-        ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int subEval = testSub.protectedEval(names, values);
-            Assertions.assertEquals(10, subEval);
-        });
+        IllegalArgumentException exception = Assertions.assertThrows(
+                IllegalArgumentException.class, () -> {
+                    int subEval = testSub.protectedEval(namesValues);
+                    Assertions.assertEquals(10, subEval);
+                }
+        );
 
-        String expectedMessage = "Arithmetic Error! \"" + value + "\" not found!";
+        String expectedMessage = "Variable \"" + value + "\" not found!";
         String actualMessage = exception.getMessage();
         Assertions.assertEquals(expectedMessage, actualMessage);
     }
@@ -131,10 +171,11 @@ public class TestSub {
         Variable right = new Variable(value);
 
         Sub testSub = new Sub(left, right);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put(value, 10);
+        namesValues.put("y", 13);
 
-        Assertions.assertEquals(0, testSub.protectedEval(names, values));
+        Assertions.assertEquals(0, testSub.protectedEval(namesValues));
     }
 
     @Test
@@ -145,15 +186,18 @@ public class TestSub {
         Variable right = new Variable(valueRight);
 
         Sub testSub = new Sub(left, right);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("x", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put("x", 10);
+        namesValues.put("y", 13);
 
-        ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int subEval = testSub.protectedEval(names, values);
-            Assertions.assertEquals(10, subEval);
-        });
+        IllegalArgumentException exception = Assertions.assertThrows(
+                IllegalArgumentException.class, () -> {
+                    int subEval = testSub.protectedEval(namesValues);
+                    Assertions.assertEquals(10, subEval);
+                }
+        );
 
-        String expectedMessage = "Arithmetic Error! \"" + valueLeft + "\" not found!";
+        String expectedMessage = "Variable \"" + valueLeft + "\" not found!";
         String actualMessage = exception.getMessage();
         Assertions.assertEquals(expectedMessage, actualMessage);
     }
@@ -167,15 +211,18 @@ public class TestSub {
         Variable right = new Variable(valueRight);
 
         Sub testSub = new Sub(left, right);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put(valueLeft, 10);
+        namesValues.put("y", 13);
 
-        ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int subEval = testSub.protectedEval(names, values);
-            Assertions.assertEquals(10, subEval);
-        });
+        IllegalArgumentException exception = Assertions.assertThrows(
+                IllegalArgumentException.class, () -> {
+                    int subEval = testSub.protectedEval(namesValues);
+                    Assertions.assertEquals(10, subEval);
+                }
+        );
 
-        String expectedMessage = "Arithmetic Error! \"" + valueRight + "\" not found!";
+        String expectedMessage = "Variable \"" + valueRight + "\" not found!";
         String actualMessage = exception.getMessage();
         Assertions.assertEquals(expectedMessage, actualMessage);
     }
@@ -187,15 +234,18 @@ public class TestSub {
         Variable right = new Variable(value);
 
         Sub testSub = new Sub(left, right);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put("asd", 10);
+        namesValues.put("y", 13);
 
-        ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int subEval = testSub.protectedEval(names, values);
-            Assertions.assertEquals(10, subEval);
-        });
+        IllegalArgumentException exception = Assertions.assertThrows(
+                IllegalArgumentException.class, () -> {
+                    int subEval = testSub.protectedEval(namesValues);
+                    Assertions.assertEquals(10, subEval);
+                }
+        );
 
-        String expectedMessage = "Arithmetic Error! \"" + value + "\" not found!";
+        String expectedMessage = "Variable \"" + value + "\" not found!";
         String actualMessage = exception.getMessage();
         Assertions.assertEquals(expectedMessage, actualMessage);
     }
@@ -208,10 +258,11 @@ public class TestSub {
         Variable right = new Variable(valueRight);
 
         Sub testSub = new Sub(left, right);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("asd", "zxc"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put(valueLeft, 10);
+        namesValues.put(valueRight, 13);
 
-        Assertions.assertEquals(-3, testSub.protectedEval(names, values));
+        Assertions.assertEquals(-3, testSub.protectedEval(namesValues));
     }
 
     @Test
@@ -221,10 +272,10 @@ public class TestSub {
         Variable right = new Variable(value);
 
         Sub testSub = new Sub(left, right);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put(value, 10);
 
-        Assertions.assertEquals(0, testSub.protectedEval(names, values));
+        Assertions.assertEquals(0, testSub.protectedEval(namesValues));
     }
 
     @Test

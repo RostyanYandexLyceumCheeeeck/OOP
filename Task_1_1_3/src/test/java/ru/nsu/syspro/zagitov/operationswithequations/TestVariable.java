@@ -1,7 +1,8 @@
 package ru.nsu.syspro.zagitov.operationswithequations;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +23,7 @@ public class TestVariable {
         String value = "zxc";
         Variable variable = new Variable(value);
         Expression variableDerivative = variable.derivative("");
-        Assertions.assertEquals("0", variableDerivative.toString());
+        Assertions.assertEquals(0, variableDerivative.eval());
     }
 
     @Test
@@ -30,7 +31,7 @@ public class TestVariable {
         String value = "zxc";
         Variable variable = new Variable(value);
         Expression variableDerivative = variable.derivative("zx");
-        Assertions.assertEquals("0", variableDerivative.toString());
+        Assertions.assertEquals(0, variableDerivative.eval());
     }
 
     @Test
@@ -38,7 +39,7 @@ public class TestVariable {
         String value = "zxc";
         Variable variable = new Variable(value);
         Expression variableDerivative = variable.derivative("zXc");
-        Assertions.assertEquals("0", variableDerivative.toString());
+        Assertions.assertEquals(0, variableDerivative.eval());
     }
 
     @Test
@@ -46,22 +47,26 @@ public class TestVariable {
         String value = "zxc";
         Variable variable = new Variable(value);
         Expression variableDerivative = variable.derivative("zxc");
-        Assertions.assertEquals("1", variableDerivative.toString());
+        Assertions.assertEquals(1, variableDerivative.eval());
     }
 
     @Test
     void testProtectedEvalNotFound0() {
         String value = "zxc";
         Variable testVariable = new Variable(value);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("x", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
-        ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int variableEval = testVariable.protectedEval(names, values);
-            Assertions.assertEquals(10, variableEval);
-        });
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put("x", 10);
+        namesValues.put("y", 13);
 
-        String expectedMessage = "Arithmetic Error! \"" + value + "\" not found!";
+        IllegalArgumentException exception = Assertions.assertThrows(
+                IllegalArgumentException.class, () -> {
+                    int variableEval = testVariable.protectedEval(namesValues);
+                    Assertions.assertEquals(10, variableEval);
+                }
+        );
+
+        String expectedMessage = "Variable \"" + value + "\" not found!";
         String actualMessage = exception.getMessage();
         Assertions.assertEquals(expectedMessage, actualMessage);
     }
@@ -70,15 +75,19 @@ public class TestVariable {
     void testProtectedEvalNotFound1() {
         String value = "zxc";
         Variable testVariable = new Variable(value);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("zx", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
-        ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int variableEval = testVariable.protectedEval(names, values);
-            Assertions.assertEquals(10, variableEval);
-        });
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put("zx", 10);
+        namesValues.put("y", 13);
 
-        String expectedMessage = "Arithmetic Error! \"" + value + "\" not found!";
+        IllegalArgumentException exception = Assertions.assertThrows(
+                IllegalArgumentException.class, () -> {
+                    int variableEval = testVariable.protectedEval(namesValues);
+                    Assertions.assertEquals(10, variableEval);
+                }
+        );
+
+        String expectedMessage = "Variable \"" + value + "\" not found!";
         String actualMessage = exception.getMessage();
         Assertions.assertEquals(expectedMessage, actualMessage);
     }
@@ -87,15 +96,19 @@ public class TestVariable {
     void testProtectedEvalNotFound2() {
         String value = "zxc";
         Variable testVariable = new Variable(value);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("zXc", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
-        ArithmeticException exception = Assertions.assertThrows(ArithmeticException.class, () -> {
-            int variableEval = testVariable.protectedEval(names, values);
-            Assertions.assertEquals(10, variableEval);
-        });
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put("zXc", 10);
+        namesValues.put("y", 13);
 
-        String expectedMessage = "Arithmetic Error! \"" + value + "\" not found!";
+        IllegalArgumentException exception = Assertions.assertThrows(
+                IllegalArgumentException.class, () -> {
+                    int variableEval = testVariable.protectedEval(namesValues);
+                    Assertions.assertEquals(10, variableEval);
+                }
+        );
+
+        String expectedMessage = "Variable \"" + value + "\" not found!";
         String actualMessage = exception.getMessage();
         Assertions.assertEquals(expectedMessage, actualMessage);
     }
@@ -104,9 +117,11 @@ public class TestVariable {
     void testProtectedEvalExcept() {
         String value = "zxc";
         Variable testVariable = new Variable(value);
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("zxc", "y"));
-        ArrayList<Integer> values = new ArrayList<>(Arrays.asList(10, 13));
 
-        Assertions.assertEquals(10, testVariable.protectedEval(names, values));
+        Map<String, Integer> namesValues = new HashMap<>();
+        namesValues.put(value, 10);
+        namesValues.put("y", 13);
+
+        Assertions.assertEquals(10, testVariable.protectedEval(namesValues));
     }
 }
