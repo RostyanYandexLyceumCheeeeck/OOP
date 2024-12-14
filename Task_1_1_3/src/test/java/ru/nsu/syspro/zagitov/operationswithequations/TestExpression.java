@@ -3,6 +3,9 @@ package ru.nsu.syspro.zagitov.operationswithequations;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Class testing Expression.
+ */
 public class TestExpression {
 
     @Test
@@ -111,7 +114,7 @@ public class TestExpression {
         Expression inputExpression = Expression.convertStringToExpression(input);
         Expression simplifyExpression = inputExpression.simplify();
         Add expectedExpression = new Add(
-                new Variable("z"),
+                new Variable("x"),
                 new Variable("x")
         );
         Assertions.assertTrue(expectedExpression.equals(simplifyExpression));
@@ -160,7 +163,7 @@ public class TestExpression {
         String input = "x*1 + 1*y";
         Expression inputExpression = Expression.convertStringToExpression(input);
         Expression simplifyExpression = inputExpression.simplify();
-        Mul expectedExpression = new Mul(
+        Add expectedExpression = new Add(
                 new Variable("x"),
                 new Variable("y")
         );

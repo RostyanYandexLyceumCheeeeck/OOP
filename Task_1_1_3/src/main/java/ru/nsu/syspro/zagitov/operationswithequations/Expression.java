@@ -63,7 +63,7 @@ public abstract class Expression {
      * @param expression string representation of an expression. Example: 3 - 6/2.
      * @return instance Expression.
      */
-    static public Expression convertStringToExpression(String expression) {
+    static Expression convertStringToExpression(String expression) {
         return Parser.stringToExpression(expression);
     }
 
@@ -79,7 +79,7 @@ public abstract class Expression {
      *
      * @return new Expression is the result of simplification.
      */
-    abstract public Expression simplify();
+    abstract Expression simplify();
 
-    abstract public boolean equals(Expression other);
+    abstract boolean equals(Expression other);
 }
