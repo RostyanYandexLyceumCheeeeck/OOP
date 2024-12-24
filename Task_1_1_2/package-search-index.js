@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"ru.nsu.syspro.zagitov.blackjack"}]
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.syspro.zagitov.blackjack"},{"l":"ru.nsu.syspro.zagitov.blackjack.cards"}];updateSearchResults();
