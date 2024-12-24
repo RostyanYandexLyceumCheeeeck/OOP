@@ -9,15 +9,14 @@ import static java.lang.Integer.MAX_VALUE;
 public class Constants {
 
     public static final int numberOfCards = 52;
-    public static final int numberOfRanks = 13;
     public static final int maxRounds = MAX_VALUE;
     public static final int maxDecks = MAX_VALUE / numberOfCards;
 
     public static final int blackJack = 21;
     public static final int dealerLimit = 17;
-
+    public static final int deckSumMinLimit = blackJack + 9 + dealerLimit + 10;
+    public static final int sumOneDeck = 220;
     public static final int overflowAce = 10;
-    public static final int indexCloseCardDealer = 3;
 
     public static final int exitGame = -1;
     public static final int stopUpCard = 0;

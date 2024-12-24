@@ -1,14 +1,12 @@
 package ru.nsu.syspro.zagitov.blackjack;
 
 import ru.nsu.syspro.zagitov.blackjack.cards.Card;
-import ru.nsu.syspro.zagitov.blackjack.cards.Rank;
-import ru.nsu.syspro.zagitov.blackjack.cards.Suit;
+import ru.nsu.syspro.zagitov.blackjack.cards.Deck;
 
 import static ru.nsu.syspro.zagitov.blackjack.Constants.blackJack;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.continueUpCard;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.dealerLimit;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.exitGame;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.indexCloseCardDealer;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer0;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer1;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer2;
@@ -26,11 +24,8 @@ import static ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundDealer0;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundDealer1;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundPlayer0;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundPlayer1;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.numberOfCards;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.stopUpCard;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 
@@ -38,20 +33,26 @@ import java.util.Scanner;
  * Class Game "Консольный блэкджек".
  */
 public class BlackJack {
-    private int countDecks;
-    private int countRounds;
-    private ArrayList<Card> cards;
+    protected Deck deck = null;
+    private int countRounds = 0;
 
     interface MyInterface {
-        boolean openCard(Player human, String prefix, int index);
+        boolean openCard(Player human, String prefix, int index) throws Exception;
+    }
+
+    /**
+     * Result round.
+     */
+    public enum whoWin {
+        DEALER,
+        DRAW,
+        PLAYER
     }
 
     /**
      * create instance of the class.
      */
-    public BlackJack() {
-        this.countDecks = 1;
-    }
+    public BlackJack() {}
 
     /**
      * setup {@code countDecks}.
@@ -59,11 +60,11 @@ public class BlackJack {
      * @param newCountDecks is input count decks.
      * @return false if {@code newCountDecks < 1} else true.
      */
-    private boolean setCountDecks(int newCountDecks) {
+    protected boolean setDeck(int newCountDecks) throws Exception {
         if (newCountDecks < 1) {
             return false;
         }
-        this.countDecks = newCountDecks;
+        this.deck = new Deck(newCountDecks);
         return true;
     }
 
@@ -73,37 +74,12 @@ public class BlackJack {
      * @param newCountRounds is input count rounds.
      * @return false if {@code newCountRounds < 1} else true.
      */
-    private boolean setCountRounds(int newCountRounds) {
+    protected boolean setCountRounds(int newCountRounds) {
         if (newCountRounds < 1) {
             return false;
         }
         this.countRounds = newCountRounds;
         return true;
-    }
-
-    /**
-     * initialize {@code cards} and shuffle.
-     */
-    private void setCards() throws Exception {
-        this.cards = new ArrayList<>(this.countDecks * numberOfCards);
-        for (int i = 0; i < this.countDecks; i++) {
-            for (Suit suit : Suit.values()) {
-                for (Rank rank : Rank.values()) {
-                    this.cards.add(new Card(rank.getName(), suit.getName(), true));
-                }
-            }
-        }
-        shuffleCards();
-    }
-
-    /**
-     * reset overflow is cards, and shuffle {@code cards}.
-     */
-    private void shuffleCards() {
-        for (Card card : this.cards) {
-            card.resetOverflow();
-        }
-        Collections.shuffle(this.cards);
     }
 
     /**
@@ -114,7 +90,7 @@ public class BlackJack {
         Scanner console = new Scanner(System.in);
 
         System.out.println("Сколько колод используем? " + messageMaxDecks);
-        while (!setCountDecks(console.nextInt())) {
+        while (!setDeck(console.nextInt())) {
             System.out.println(messageMaxDecks);
         }
 
@@ -122,7 +98,6 @@ public class BlackJack {
         while (!setCountRounds(console.nextInt())) {
             System.out.println(messageMaxRounds);
         }
-        setCards();
 
         try {
             System.out.println(messageExitGame0);
@@ -130,13 +105,13 @@ public class BlackJack {
             int scorePlayer = 0;
             int scoreDealer = 0;
             for (int roundNumber = 0; roundNumber < this.countRounds; roundNumber++) {
-                int resultRound = round(console, roundNumber + 1);
-                scorePlayer += (resultRound > 0 ? 1 : 0);
-                scoreDealer += (resultRound < 0 ? 1 : 0);
+                whoWin resultRound = round(console, roundNumber + 1);
+                scorePlayer += (resultRound == whoWin.PLAYER ? 1 : 0);
+                scoreDealer += (resultRound == whoWin.DEALER ? 1 : 0);
 
-                String whoWinRound = (resultRound > 0
+                String whoWinRound = (resultRound == whoWin.PLAYER
                         ? messageWinRoundPlayer0 : messageWinRoundDealer0);
-                if (resultRound == 0) {
+                if (resultRound == whoWin.DRAW) {
                     whoWinRound = messageDrawRound;
                 }
 
@@ -148,8 +123,6 @@ public class BlackJack {
 
                 System.out.println(whoWinRound + " Счёт " + scorePlayer + ":" + scoreDealer
                         + currentLeader + "\n");
-                this.cards.get(indexCloseCardDealer).faceUp = true;
-                shuffleCards();
             }
         } catch (Exception myException) {
             System.out.println(myException.getMessage());
@@ -168,25 +141,27 @@ public class BlackJack {
         System.out.println(messageDealer3 + dealer);
     }
 
+    private whoWin round(Scanner console, int number) throws Exception {
+        Player player = new Player();
+        Player dealer = new Player();
+        return round(console, number, player, dealer);
+    }
+
     /**
      * function start round.
      *
      * @param console where the user enters the data.
      * @param number round number.
-     * @return -1 if win Dealer else (1 if You win else 0).
+     * @return enum whoWin.
      * @throws Exception if you have entered {@code exitGame} or not {@code messagePlayer1}.
      */
-    private int round(Scanner console, int number) throws Exception {
-        int draw = 0;
-        int winPlayer = 1;
-        int winDealer = -1;
-        Player player = new Player();
-        Player dealer = new Player();
+    protected whoWin round(Scanner console, int number, Player player, Player dealer)
+            throws Exception {
         boolean roundLoose;
         int index;
 
         MyInterface copyPaste = (human, prefix, index1) -> {
-            Card newCard = cards.get(index1);
+            Card newCard = this.deck.getCard();
             System.out.println(prefix + newCard);
 
             boolean result = human.addCard(newCard);
@@ -196,17 +171,17 @@ public class BlackJack {
             return result;
         };
 
-        for (index = 0; index <= indexCloseCardDealer; index += 2) {
-            player.addCard(this.cards.get(index));
-            dealer.addCard(this.cards.get(index + 1));
+        for (index = 0; index < 2; index++) {
+            player.addCard(this.deck.getCard());
+            dealer.addCard(this.deck.getCard());
         }
-        this.cards.get(indexCloseCardDealer).faceUp = false;
+        dealer.getLastCard().faceUp = false;
 
         System.out.println("Раунд " + number + "\nДилер раздал карты");
         printHands(player, dealer);
 
         if (player.getScore() == blackJack) {
-            return winPlayer;
+            return whoWin.PLAYER;
         }
 
         System.out.println(messagePlayer0);
@@ -220,7 +195,7 @@ public class BlackJack {
             roundLoose = copyPaste.openCard(player, messagePlayer2, ++index);
 
             if (roundLoose) {
-                return winDealer;
+                return whoWin.DEALER;
             }
 
             System.out.println(messagePlayer0);
@@ -235,28 +210,28 @@ public class BlackJack {
             throw new Exception(messageExitGame1);
         }
 
-        this.cards.get(indexCloseCardDealer).faceUp = true;
+        dealer.getLastCard().faceUp = true;
         System.out.println(messageDealer0);
-        System.out.println(messageDealer1 + this.cards.get(indexCloseCardDealer));
+        System.out.println(messageDealer1 + dealer.getLastCard());
 
         printHands(player, dealer);
         System.out.println();
 
         if (dealer.getScore() == blackJack) {
-            return winDealer;
+            return whoWin.DEALER;
         }
 
         while (dealer.getScore() < dealerLimit) {
             roundLoose = copyPaste.openCard(dealer, messageDealer2, ++index);
 
             if (roundLoose) {
-                return winPlayer;
+                return whoWin.PLAYER;
             }
         }
 
         if (player.getScore() == dealer.getScore()) {
-            return draw;
+            return whoWin.DRAW;
         }
-        return (player.getScore() > dealer.getScore() ? winPlayer : winDealer);
+        return (player.getScore() > dealer.getScore() ? whoWin.PLAYER : whoWin.DEALER);
     }
 }
