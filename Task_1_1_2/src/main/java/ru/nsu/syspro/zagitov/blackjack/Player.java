@@ -54,7 +54,7 @@ public class Player {
         if (hand.isEmpty()) {
             return null;
         }
-        return hand.getLast();
+        return hand.get(hand.size() - 1);
     }
 
     /**

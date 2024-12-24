@@ -49,7 +49,7 @@ public class Deck {
         if (sumDeck < deckSumMinLimit) {
             setCards();
         }
-        Card result = cards.removeLast();
+        Card result = cards.remove(cards.size() - 1);
         sumDeck -= (result.getPrice() == Rank.ACE.points ? 1 : result.getPrice());
         return result;
     }
