@@ -6,7 +6,7 @@ import ru.nsu.syspro.zagitov.blackjack.cards.Deck;
 
 import java.util.Scanner;
 
-import static ru.nsu.syspro.zagitov.blackjack.Constants.*;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.blackJack;
 
 
 /**
