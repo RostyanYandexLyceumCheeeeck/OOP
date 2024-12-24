@@ -1,12 +1,11 @@
 package ru.nsu.syspro.zagitov.blackjack;
 
+import static ru.nsu.syspro.zagitov.blackjack.Constants.blackJack;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.nsu.syspro.zagitov.blackjack.cards.Deck;
-
 import java.util.Scanner;
-
-import static ru.nsu.syspro.zagitov.blackjack.Constants.blackJack;
 
 
 /**
