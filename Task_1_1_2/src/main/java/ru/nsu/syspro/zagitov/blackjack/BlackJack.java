@@ -2,32 +2,31 @@ package ru.nsu.syspro.zagitov.blackjack;
 
 import java.util.Scanner;
 
+import static ru.nsu.syspro.zagitov.blackjack.Constants.blackJack;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.continueUpCard;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.dealerLimit;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.exitGame;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer0;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer1;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer2;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer3;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messageDrawRound;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messageExitGame0;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messageExitGame1;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messageMaxDecks;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messageMaxRounds;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer0;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer1;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer2;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer3;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundDealer0;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundDealer1;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundPlayer0;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundPlayer1;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.stopUpCard;
+
 import ru.nsu.syspro.zagitov.blackjack.cards.Card;
 import ru.nsu.syspro.zagitov.blackjack.cards.Deck;
-
-import ru.nsu.syspro.zagitov.blackjack.Constants.blackJack;
-import ru.nsu.syspro.zagitov.blackjack.Constants.continueUpCard;
-import ru.nsu.syspro.zagitov.blackjack.Constants.dealerLimit;
-import ru.nsu.syspro.zagitov.blackjack.Constants.exitGame;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer0;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer1;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer2;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer3;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messageDrawRound;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messageExitGame0;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messageExitGame1;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messageMaxDecks;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messageMaxRounds;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer0;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer1;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer2;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer3;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundDealer0;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundDealer1;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundPlayer0;
-import ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundPlayer1;
-import ru.nsu.syspro.zagitov.blackjack.Constants.stopUpCard;
-
 
 /**
  * Class Game "Консольный блэкджек".
@@ -52,7 +51,9 @@ public class BlackJack {
     /**
      * create instance of the class.
      */
-    public BlackJack() {}
+    public BlackJack() {
+        this.countRounds = 0;
+    }
 
     /**
      * setup {@code countDecks}.

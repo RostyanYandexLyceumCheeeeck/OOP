@@ -1,6 +1,5 @@
 package ru.nsu.syspro.zagitov.blackjack.cards;
 
-import static ru.nsu.syspro.zagitov.blackjack.Constants.closeCard;
 import static ru.nsu.syspro.zagitov.blackjack.Constants.numberOfCards;
 
 import org.junit.jupiter.api.Assertions;

@@ -1,7 +1,7 @@
 package ru.nsu.syspro.zagitov.blackjack.cards;
 
-import ru.nsu.syspro.zagitov.blackjack.Constants.closeCard;
-import ru.nsu.syspro.zagitov.blackjack.Constants.overflowAce;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.closeCard;
+import static ru.nsu.syspro.zagitov.blackjack.Constants.overflowAce;
 
 
 /**

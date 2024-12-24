@@ -43,17 +43,17 @@ public class TestBlackJack {
         Player player = new Player();
         Player dealer = new Player();
 
-        BlackJack.whoWin result = game.round(console, 0, player, dealer);
+        BlackJack.WhoWin result = game.round(console, 0, player, dealer);
         if (player.getScore() > blackJack) {
-            Assertions.assertEquals(BlackJack.whoWin.DEALER, result);
+            Assertions.assertEquals(BlackJack.WhoWin.DEALER, result);
         } else if (dealer.getScore() > blackJack) {
-            Assertions.assertEquals(BlackJack.whoWin.PLAYER, result);
+            Assertions.assertEquals(BlackJack.WhoWin.PLAYER, result);
         } else if (player.getScore() > dealer.getScore()) {
-            Assertions.assertEquals(BlackJack.whoWin.PLAYER, result);
+            Assertions.assertEquals(BlackJack.WhoWin.PLAYER, result);
         } else if (player.getScore() < dealer.getScore()) {
-            Assertions.assertEquals(BlackJack.whoWin.DEALER, result);
+            Assertions.assertEquals(BlackJack.WhoWin.DEALER, result);
         } else if (player.getScore() == dealer.getScore()) {
-            Assertions.assertEquals(BlackJack.whoWin.DRAW, result);
+            Assertions.assertEquals(BlackJack.WhoWin.DRAW, result);
         }
     }
 
@@ -65,17 +65,17 @@ public class TestBlackJack {
         Player player = new Player();
         Player dealer = new Player();
 
-        BlackJack.whoWin result = game.round(console, 0, player, dealer);
+        BlackJack.WhoWin result = game.round(console, 0, player, dealer);
         if (player.getScore() > blackJack) {
-            Assertions.assertEquals(BlackJack.whoWin.DEALER, result);
+            Assertions.assertEquals(BlackJack.WhoWin.DEALER, result);
         } else if (dealer.getScore() > blackJack) {
-            Assertions.assertEquals(BlackJack.whoWin.PLAYER, result);
+            Assertions.assertEquals(BlackJack.WhoWin.PLAYER, result);
         } else if (player.getScore() > dealer.getScore()) {
-            Assertions.assertEquals(BlackJack.whoWin.PLAYER, result);
+            Assertions.assertEquals(BlackJack.WhoWin.PLAYER, result);
         } else if (player.getScore() < dealer.getScore()) {
-            Assertions.assertEquals(BlackJack.whoWin.DEALER, result);
+            Assertions.assertEquals(BlackJack.WhoWin.DEALER, result);
         } else if (player.getScore() == dealer.getScore()) {
-            Assertions.assertEquals(BlackJack.whoWin.DRAW, result);
+            Assertions.assertEquals(BlackJack.WhoWin.DRAW, result);
         }
     }
 
@@ -87,17 +87,17 @@ public class TestBlackJack {
         Player player = new Player();
         Player dealer = new Player();
 
-        BlackJack.whoWin result = game.round(console, 0, player, dealer);
+        BlackJack.WhoWin result = game.round(console, 0, player, dealer);
         if (player.getScore() > blackJack) {
-            Assertions.assertEquals(BlackJack.whoWin.DEALER, result);
+            Assertions.assertEquals(BlackJack.WhoWin.DEALER, result);
         } else if (dealer.getScore() > blackJack) {
-            Assertions.assertEquals(BlackJack.whoWin.PLAYER, result);
+            Assertions.assertEquals(BlackJack.WhoWin.PLAYER, result);
         } else if (player.getScore() > dealer.getScore()) {
-            Assertions.assertEquals(BlackJack.whoWin.PLAYER, result);
+            Assertions.assertEquals(BlackJack.WhoWin.PLAYER, result);
         } else if (player.getScore() < dealer.getScore()) {
-            Assertions.assertEquals(BlackJack.whoWin.DEALER, result);
+            Assertions.assertEquals(BlackJack.WhoWin.DEALER, result);
         } else if (player.getScore() == dealer.getScore()) {
-            Assertions.assertEquals(BlackJack.whoWin.DRAW, result);
+            Assertions.assertEquals(BlackJack.WhoWin.DRAW, result);
         }
     }
 }

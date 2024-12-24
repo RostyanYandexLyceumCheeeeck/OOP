@@ -1,7 +1,6 @@
 package ru.nsu.syspro.zagitov.blackjack;
 
-
-import java.lang.Integer.MAX_VALUE;
+import static java.lang.Integer.MAX_VALUE;
 
 /**
  *  class Constants my program.
@@ -29,15 +28,15 @@ public class Constants {
             + maxRounds + "]";
     public static final String messageExitGame0 =
             "--------------------------------------------------\n"
-          + "!!! Вы можете выйти из игры, если введёте “" + exitGame + "” !!!\n"
-          + "--------------------------------------------------";
+                    + "!!! Вы можете выйти из игры, если введёте “" + exitGame + "” !!!\n"
+                    + "--------------------------------------------------";
     public static final String messageExitGame1 = "Вы досрочно закочили игру!";
 
     public static final String messagePlayer0 = "Ваш ход\n-------\nВведите “" + continueUpCard
-                                               + "”, чтобы взять карту, и “" + stopUpCard
-                                               + "”, чтобы остановиться...";
+            + "”, чтобы взять карту, и “" + stopUpCard
+            + "”, чтобы остановиться...";
     public static final String messagePlayer1 = "Введите число из возможных: [" + exitGame + ", "
-                                               + stopUpCard + ", " + continueUpCard + "] !!!";
+            + stopUpCard + ", " + continueUpCard + "] !!!";
     public static final String messagePlayer2 = "Вы открыли карту ";
     public static final String messagePlayer3 = "Ваши карты:   ";
 
