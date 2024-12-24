@@ -22,7 +22,7 @@ public class TestDeck {
     public void getCard() throws Exception {
         int countDecks = 1;
         Deck deck = new Deck(countDecks);
-        Assertions.assertEquals(deck.cards.getLast(), deck.getCard());
+        Assertions.assertEquals(deck.cards.get(deck.cards.size() - 1), deck.getCard());
     }
 
     @Test

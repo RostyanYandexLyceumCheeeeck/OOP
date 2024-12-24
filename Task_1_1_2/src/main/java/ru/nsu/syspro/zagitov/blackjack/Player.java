@@ -1,9 +1,9 @@
 package ru.nsu.syspro.zagitov.blackjack;
 
-import ru.nsu.syspro.zagitov.blackjack.cards.Card;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.blackJack;
-
 import java.util.ArrayList;
+
+import ru.nsu.syspro.zagitov.blackjack.cards.Card;
+import ru.nsu.syspro.zagitov.blackjack.Constants.blackJack;
 
 
 /**
@@ -49,7 +49,11 @@ public class Player {
         return (score > blackJack);
     }
 
-
+    /**
+     * Get last card in hand.
+     *
+     * @return last card.
+     */
     public Card getLastCard() {
         if (hand.isEmpty()) {
             return null;

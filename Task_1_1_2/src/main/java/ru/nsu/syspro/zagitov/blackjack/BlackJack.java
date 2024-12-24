@@ -1,32 +1,32 @@
 package ru.nsu.syspro.zagitov.blackjack;
 
+import java.util.Scanner;
+
 import ru.nsu.syspro.zagitov.blackjack.cards.Card;
 import ru.nsu.syspro.zagitov.blackjack.cards.Deck;
 
-import static ru.nsu.syspro.zagitov.blackjack.Constants.blackJack;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.continueUpCard;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.dealerLimit;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.exitGame;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer0;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer1;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer2;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer3;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messageDrawRound;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messageExitGame0;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messageExitGame1;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messageMaxDecks;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messageMaxRounds;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer0;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer1;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer2;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer3;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundDealer0;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundDealer1;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundPlayer0;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundPlayer1;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.stopUpCard;
-
-import java.util.Scanner;
+import ru.nsu.syspro.zagitov.blackjack.Constants.blackJack;
+import ru.nsu.syspro.zagitov.blackjack.Constants.continueUpCard;
+import ru.nsu.syspro.zagitov.blackjack.Constants.dealerLimit;
+import ru.nsu.syspro.zagitov.blackjack.Constants.exitGame;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer0;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer1;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer2;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messageDealer3;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messageDrawRound;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messageExitGame0;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messageExitGame1;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messageMaxDecks;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messageMaxRounds;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer0;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer1;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer2;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messagePlayer3;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundDealer0;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundDealer1;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundPlayer0;
+import ru.nsu.syspro.zagitov.blackjack.Constants.messageWinRoundPlayer1;
+import ru.nsu.syspro.zagitov.blackjack.Constants.stopUpCard;
 
 
 /**
@@ -43,7 +43,7 @@ public class BlackJack {
     /**
      * Result round.
      */
-    public enum whoWin {
+    public enum WhoWin {
         DEALER,
         DRAW,
         PLAYER
@@ -105,13 +105,13 @@ public class BlackJack {
             int scorePlayer = 0;
             int scoreDealer = 0;
             for (int roundNumber = 0; roundNumber < this.countRounds; roundNumber++) {
-                whoWin resultRound = round(console, roundNumber + 1);
-                scorePlayer += (resultRound == whoWin.PLAYER ? 1 : 0);
-                scoreDealer += (resultRound == whoWin.DEALER ? 1 : 0);
+                WhoWin resultRound = round(console, roundNumber + 1);
+                scorePlayer += (resultRound == WhoWin.PLAYER ? 1 : 0);
+                scoreDealer += (resultRound == WhoWin.DEALER ? 1 : 0);
 
-                String whoWinRound = (resultRound == whoWin.PLAYER
+                String whoWinRound = (resultRound == WhoWin.PLAYER
                         ? messageWinRoundPlayer0 : messageWinRoundDealer0);
-                if (resultRound == whoWin.DRAW) {
+                if (resultRound == WhoWin.DRAW) {
                     whoWinRound = messageDrawRound;
                 }
 
@@ -141,7 +141,7 @@ public class BlackJack {
         System.out.println(messageDealer3 + dealer);
     }
 
-    private whoWin round(Scanner console, int number) throws Exception {
+    private WhoWin round(Scanner console, int number) throws Exception {
         Player player = new Player();
         Player dealer = new Player();
         return round(console, number, player, dealer);
@@ -152,10 +152,10 @@ public class BlackJack {
      *
      * @param console where the user enters the data.
      * @param number round number.
-     * @return enum whoWin.
+     * @return enum WhoWin.
      * @throws Exception if you have entered {@code exitGame} or not {@code messagePlayer1}.
      */
-    protected whoWin round(Scanner console, int number, Player player, Player dealer)
+    protected WhoWin round(Scanner console, int number, Player player, Player dealer)
             throws Exception {
         boolean roundLoose;
         int index;
@@ -181,7 +181,7 @@ public class BlackJack {
         printHands(player, dealer);
 
         if (player.getScore() == blackJack) {
-            return whoWin.PLAYER;
+            return WhoWin.PLAYER;
         }
 
         System.out.println(messagePlayer0);
@@ -195,7 +195,7 @@ public class BlackJack {
             roundLoose = copyPaste.openCard(player, messagePlayer2, ++index);
 
             if (roundLoose) {
-                return whoWin.DEALER;
+                return WhoWin.DEALER;
             }
 
             System.out.println(messagePlayer0);
@@ -218,20 +218,20 @@ public class BlackJack {
         System.out.println();
 
         if (dealer.getScore() == blackJack) {
-            return whoWin.DEALER;
+            return WhoWin.DEALER;
         }
 
         while (dealer.getScore() < dealerLimit) {
             roundLoose = copyPaste.openCard(dealer, messageDealer2, ++index);
 
             if (roundLoose) {
-                return whoWin.PLAYER;
+                return WhoWin.PLAYER;
             }
         }
 
         if (player.getScore() == dealer.getScore()) {
-            return whoWin.DRAW;
+            return WhoWin.DRAW;
         }
-        return (player.getScore() > dealer.getScore() ? whoWin.PLAYER : whoWin.DEALER);
+        return (player.getScore() > dealer.getScore() ? WhoWin.PLAYER : WhoWin.DEALER);
     }
 }

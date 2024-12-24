@@ -1,7 +1,7 @@
 package ru.nsu.syspro.zagitov.blackjack;
 
 
-import static java.lang.Integer.MAX_VALUE;
+import java.lang.Integer.MAX_VALUE;
 
 /**
  *  class Constants my program.

@@ -58,8 +58,8 @@ public enum Rank {
      * @throws IllegalArgumentException if name rank not found.
      */
     public static Rank findByName(String name) throws IllegalArgumentException {
-        for(Rank rank : values()) {
-            if(rank.getName().equals(name)) {
+        for (Rank rank : values()) {
+            if (rank.getName().equals(name)) {
                 return rank;
             }
         }

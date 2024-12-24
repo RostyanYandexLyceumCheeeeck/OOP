@@ -1,8 +1,9 @@
 package ru.nsu.syspro.zagitov.blackjack.cards;
 
-import static ru.nsu.syspro.zagitov.blackjack.Constants.deckSumMinLimit;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.numberOfCards;
-import static ru.nsu.syspro.zagitov.blackjack.Constants.sumOneDeck;
+import ru.nsu.syspro.zagitov.blackjack.Constants.deckSumMinLimit;
+import ru.nsu.syspro.zagitov.blackjack.Constants.numberOfCards;
+import ru.nsu.syspro.zagitov.blackjack.Constants.sumOneDeck;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
